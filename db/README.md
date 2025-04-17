@@ -8,7 +8,96 @@ Each schema is defined in a separate file under the `db/schema` directory. This 
 
 ### Current Schemas
 
-- `users.ts`: Contains the user table schema
+- `enums.ts`: Contains shared enums (e.g., user roles, group types)
+- `users.ts`: User management table
+- `student-clubs.ts`: Student club management table
+- `groups.ts`: Unified group management table
+- `events.ts`: Event management table
+- `announcements.ts`: Announcement management table
+- `images.ts`: Image management table
+- `posters.ts`: Poster management table
+- `utils.ts`: Utility functions for schema definitions
+
+## Table Descriptions
+
+### Users Table
+- `id`: Primary key
+- `username`: Unique username
+- `password`: Hashed password
+- `role`: User role (admin/user/student_club)
+- `student_club_id`: Foreign key to student_clubs table (optional)
+- `created_at`: Creation timestamp
+- `deleted_at`: Soft delete timestamp
+
+### Student Clubs Table
+- `id`: Primary key
+- `name`: Club name (unique when not deleted)
+- `short_name`: Club short name (unique when not deleted)
+- `image_id`: Image identifier
+- `created_at`: Creation timestamp
+- `deleted_at`: Soft delete timestamp
+
+### Groups Table
+- `id`: Primary key
+- `name`: Group name (unique when not deleted)
+- `color`: Hex color code
+- `type`: Group type (event/announcement)
+- `user_id`: Foreign key to users table
+- `created_at`: Creation timestamp
+- `deleted_at`: Soft delete timestamp
+
+### Events Table
+- `id`: Primary key
+- `name`: Event name (unique when not deleted)
+- `starts_at`: Event start time
+- `ends_at`: Event end time
+- `all_day`: Whether the event is all-day
+- `group_id`: Foreign key to groups table (optional)
+- `user_id`: Foreign key to users table
+- `created_at`: Creation timestamp
+- `deleted_at`: Soft delete timestamp
+
+### Announcements Table
+- `id`: Primary key
+- `name`: Announcement name (unique when not deleted)
+- `message`: Markdown content
+- `group_id`: Foreign key to groups table (optional)
+- `user_id`: Foreign key to users table
+- `created_at`: Creation timestamp
+- `deleted_at`: Soft delete timestamp
+
+### Images Table
+- `id`: Primary key
+- `file`: Base64 encoded image file
+- `name`: Image name (optional)
+- `created_at`: Creation timestamp
+- `deleted_at`: Soft delete timestamp
+
+### Posters Table
+- `id`: Primary key
+- `name`: Poster name (unique when not deleted)
+- `image_id`: Foreign key to images table
+- `group_id`: Foreign key to groups table (optional)
+- `user_id`: Foreign key to users table
+- `created_at`: Creation timestamp
+- `deleted_at`: Soft delete timestamp
+
+## Soft Delete Implementation
+
+The database implements soft deletes using a `deleted_at` timestamp field. When a record is "deleted", its `deleted_at` field is set to the current timestamp instead of being physically removed from the database.
+
+### Unique Constraints with Soft Deletes
+
+Unique constraints (like event names, group names, announcement names, poster names, and student club names/short names) are implemented as partial unique indexes that only consider non-deleted records. This means:
+
+1. You cannot have two active (non-deleted) records with the same name
+2. You can have multiple deleted records with the same name
+3. You can reuse a name that was previously used by a deleted record
+
+For example:
+- If you have a group named "Meeting" and delete it
+- You can create a new group named "Meeting"
+- But you cannot have two active groups both named "Meeting"
 
 ## Database Commands
 
