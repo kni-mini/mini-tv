@@ -25,7 +25,7 @@ Each schema is defined in a separate file under the `db/schema` directory. This 
 - `id`: Primary key
 - `username`: Unique username
 - `password`: Hashed password
-- `role`: User role (admin/user/student_club)
+- `role`: User role (dean/student_council/student_club)
 - `student_club_id`: Foreign key to student_clubs table (optional)
 - `created_at`: Creation timestamp
 - `deleted_at`: Soft delete timestamp
@@ -44,7 +44,7 @@ Each schema is defined in a separate file under the `db/schema` directory. This 
 - `id`: Primary key
 - `name`: Group name (unique when not deleted)
 - `color`: Hex color code
-- `type`: Group type (event/announcement)
+- `type`: Group type (event/announcement/poster)
 - `user_id`: Foreign key to users table
 - `created_at`: Creation timestamp
 - `deleted_at`: Soft delete timestamp

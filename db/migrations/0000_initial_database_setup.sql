@@ -1,5 +1,5 @@
-CREATE TYPE "public"."group_type" AS ENUM('event', 'announcement');--> statement-breakpoint
-CREATE TYPE "public"."user_role" AS ENUM('admin', 'user', 'student_club');--> statement-breakpoint
+CREATE TYPE "public"."group_type" AS ENUM('event', 'announcement', 'poster');--> statement-breakpoint
+CREATE TYPE "public"."user_role" AS ENUM('dean', 'student_council', 'student_club');--> statement-breakpoint
 CREATE TABLE "announcements" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,

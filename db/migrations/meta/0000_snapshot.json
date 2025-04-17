@@ -1,5 +1,5 @@
 {
-  "id": "93ff5ddd-e161-4a91-b245-38bfc78d259c",
+  "id": "cfc76587-9439-4229-a1c4-c7a470a39b3d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -628,12 +628,12 @@
     "public.group_type": {
       "name": "group_type",
       "schema": "public",
-      "values": ["event", "announcement"]
+      "values": ["event", "announcement", "poster"]
     },
     "public.user_role": {
       "name": "user_role",
       "schema": "public",
-      "values": ["admin", "user", "student_club"]
+      "values": ["dean", "student_council", "student_club"]
     }
   },
   "schemas": {},
