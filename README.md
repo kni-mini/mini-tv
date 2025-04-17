@@ -12,6 +12,20 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Code Quality
+
+This project uses pre-commit hooks to maintain code quality. The following checks are performed automatically before each commit:
+
+- ESLint for TypeScript/JavaScript code quality
+- Prettier for code formatting
+- Automatic fixing of common issues
+
+The configuration files are:
+
+- `.eslintrc.json` - ESLint configuration
+- `.prettierrc` - Prettier formatting rules
+- `.lintstagedrc` - Configuration for which files to check
+
 ## Database Setup
 
 This project uses Drizzle ORM with PostgreSQL. For detailed database documentation, see [db/README.md](db/README.md).
@@ -19,11 +33,13 @@ This project uses Drizzle ORM with PostgreSQL. For detailed database documentati
 ### Development Database
 
 To start the development database:
+
 ```bash
 pnpm db:dev:up
 ```
 
 To stop the development database:
+
 ```bash
 pnpm db:dev:down
 ```
@@ -31,11 +47,13 @@ pnpm db:dev:down
 ### Production Database
 
 To start the production database:
+
 ```bash
 pnpm db:prod:up
 ```
 
 To stop the production database:
+
 ```bash
 pnpm db:prod:down
 ```
@@ -43,11 +61,13 @@ pnpm db:prod:down
 ### Database Migrations
 
 To generate migrations:
+
 ```bash
 pnpm db:generate
 ```
 
 To apply migrations:
+
 ```bash
 pnpm db:migrate
 ```
@@ -55,6 +75,7 @@ pnpm db:migrate
 ## Environment Variables
 
 Create a `.env` file in the root directory with the following variables:
+
 ```
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
