@@ -12,6 +12,6 @@ export const users = pgTable('users', {
   studentClubId: integer('student_club_id').references(() => studentClubs.id),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   deletedAt: timestamp('deleted_at'),
-}, (table) => ({
-  usernameIdx: uniqueWhenNotDeleted(table, 'username')(index()),
-})); 
+}, (table) => [
+  uniqueWhenNotDeleted(table, 'username')(index()),
+]); 

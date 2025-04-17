@@ -8,7 +8,7 @@ export const studentClubs = pgTable('student_clubs', {
   imageId: text('image_id').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   deletedAt: timestamp('deleted_at'),
-}, (table) => ({
-  nameIdx: uniqueWhenNotDeleted(table, 'name')(index()),
-  shortNameIdx: uniqueWhenNotDeleted(table, 'short_name')(index()),
-})); 
+}, (table) => [
+  uniqueWhenNotDeleted(table, 'name')(index()),
+  uniqueWhenNotDeleted(table, 'short_name')(index()),
+]); 
