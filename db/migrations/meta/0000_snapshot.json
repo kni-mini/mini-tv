@@ -1,5 +1,5 @@
 {
-  "id": "f9dcb9fd-9fc0-448a-bbd8-c7042fd31210",
+  "id": "93ff5ddd-e161-4a91-b245-38bfc78d259c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -624,7 +624,18 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {},
+  "enums": {
+    "public.group_type": {
+      "name": "group_type",
+      "schema": "public",
+      "values": ["event", "announcement"]
+    },
+    "public.user_role": {
+      "name": "user_role",
+      "schema": "public",
+      "values": ["admin", "user", "student_club"]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "roles": {},
