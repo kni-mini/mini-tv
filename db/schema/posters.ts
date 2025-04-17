@@ -13,5 +13,5 @@ export const posters = pgTable('posters', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   deletedAt: timestamp('deleted_at'),
 }, (table) => ({
-  nameIdx: uniqueWhenNotDeleted('posters', 'name')(index()),
+  nameIdx: uniqueWhenNotDeleted(table, 'name')(index()),
 })); 

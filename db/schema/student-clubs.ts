@@ -9,6 +9,6 @@ export const studentClubs = pgTable('student_clubs', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   deletedAt: timestamp('deleted_at'),
 }, (table) => ({
-  nameIdx: uniqueWhenNotDeleted('student_clubs', 'name')(index()),
-  shortNameIdx: uniqueWhenNotDeleted('student_clubs', 'short_name')(index()),
+  nameIdx: uniqueWhenNotDeleted(table, 'name')(index()),
+  shortNameIdx: uniqueWhenNotDeleted(table, 'short_name')(index()),
 })); 

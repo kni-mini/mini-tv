@@ -1,9 +1,10 @@
 import { IndexBuilder, IndexBuilderOn } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
 
-export function uniqueWhenNotDeleted(tableName: string, columnName: string) {
+export function uniqueWhenNotDeleted(table: any, columnName: string) {
   return (index: IndexBuilderOn) => {
     return index
-      .on(tableName, columnName)
-      .where(`deleted_at IS NULL`);
+      .on(table[columnName])
+      .where(sql`${table.deletedAt} IS NULL`);
   };
 } 

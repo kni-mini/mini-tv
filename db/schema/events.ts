@@ -14,5 +14,5 @@ export const events = pgTable('events', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   deletedAt: timestamp('deleted_at'),
 }, (table) => ({
-  nameIdx: uniqueWhenNotDeleted('events', 'name')(index()),
+  nameIdx: uniqueWhenNotDeleted(table, 'name')(index()),
 })); 
