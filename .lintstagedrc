@@ -5,5 +5,11 @@
   ],
   "*.{json,md}": [
     "prettier --write"
+  ],
+  "scripts/generate-migration.js": [
+    "prettier --write"
+  ],
+  "db/schema/utils.ts": [
+    "prettier --write"
   ]
 } 

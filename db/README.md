@@ -21,6 +21,7 @@ Each schema is defined in a separate file under the `db/schema` directory. This 
 ## Table Descriptions
 
 ### Users Table
+
 - `id`: Primary key
 - `username`: Unique username
 - `password`: Hashed password
@@ -30,6 +31,7 @@ Each schema is defined in a separate file under the `db/schema` directory. This 
 - `deleted_at`: Soft delete timestamp
 
 ### Student Clubs Table
+
 - `id`: Primary key
 - `name`: Club name (unique when not deleted)
 - `short_name`: Club short name (unique when not deleted)
@@ -38,6 +40,7 @@ Each schema is defined in a separate file under the `db/schema` directory. This 
 - `deleted_at`: Soft delete timestamp
 
 ### Groups Table
+
 - `id`: Primary key
 - `name`: Group name (unique when not deleted)
 - `color`: Hex color code
@@ -47,6 +50,7 @@ Each schema is defined in a separate file under the `db/schema` directory. This 
 - `deleted_at`: Soft delete timestamp
 
 ### Events Table
+
 - `id`: Primary key
 - `name`: Event name (unique when not deleted)
 - `starts_at`: Event start time
@@ -58,15 +62,19 @@ Each schema is defined in a separate file under the `db/schema` directory. This 
 - `deleted_at`: Soft delete timestamp
 
 ### Announcements Table
+
 - `id`: Primary key
 - `name`: Announcement name (unique when not deleted)
 - `message`: Markdown content
 - `group_id`: Foreign key to groups table (optional)
 - `user_id`: Foreign key to users table
+- `start_date`: When the announcement becomes visible (defaults to creation time)
+- `end_date`: When the announcement should be hidden (null means visible indefinitely)
 - `created_at`: Creation timestamp
 - `deleted_at`: Soft delete timestamp
 
 ### Images Table
+
 - `id`: Primary key
 - `file`: Base64 encoded image file
 - `name`: Image name (optional)
@@ -74,11 +82,14 @@ Each schema is defined in a separate file under the `db/schema` directory. This 
 - `deleted_at`: Soft delete timestamp
 
 ### Posters Table
+
 - `id`: Primary key
 - `name`: Poster name (unique when not deleted)
 - `image_id`: Foreign key to images table
 - `group_id`: Foreign key to groups table (optional)
 - `user_id`: Foreign key to users table
+- `start_date`: When the poster becomes visible (defaults to creation time)
+- `end_date`: When the poster should be hidden (null means visible indefinitely)
 - `created_at`: Creation timestamp
 - `deleted_at`: Soft delete timestamp
 
@@ -95,6 +106,7 @@ Unique constraints (like event names, group names, announcement names, poster na
 3. You can reuse a name that was previously used by a deleted record
 
 For example:
+
 - If you have a group named "Meeting" and delete it
 - You can create a new group named "Meeting"
 - But you cannot have two active groups both named "Meeting"
@@ -104,11 +116,13 @@ For example:
 ### Development
 
 To start the development database:
+
 ```bash
 pnpm db:dev:up
 ```
 
 To stop the development database:
+
 ```bash
 pnpm db:dev:down
 ```
@@ -116,11 +130,13 @@ pnpm db:dev:down
 ### Production
 
 To start the production database:
+
 ```bash
 pnpm db:prod:up
 ```
 
 To stop the production database:
+
 ```bash
 pnpm db:prod:down
 ```
@@ -128,11 +144,25 @@ pnpm db:prod:down
 ### Migrations
 
 To generate migrations:
+
 ```bash
-pnpm db:generate
+pnpm db:generate --name descriptive_name_in_snake_case
 ```
 
+The migration name must:
+
+- Be in snake_case format (lowercase letters, numbers, and underscores)
+- Be descriptive of the changes being made
+- Be provided using the --name flag
+
+Examples of good migration names:
+
+- `add_start_end_dates_to_content`
+- `create_users_table`
+- `add_soft_delete_to_events`
+
 To apply migrations:
+
 ```bash
 pnpm db:migrate
 ```
@@ -146,7 +176,6 @@ The following environment variables are required:
 - `POSTGRES_DB`: Database name
 - `POSTGRES_HOST`: Database host
 - `POSTGRES_PORT`: Database port
-- `DATABASE_URL`: Full database connection URL
 
 ## Adding New Schemas
 
@@ -156,6 +185,7 @@ The following environment variables are required:
 4. Generate and apply migrations
 
 Example:
+
 ```typescript
 import { pgTable, serial, text } from 'drizzle-orm/pg-core';
 
@@ -163,4 +193,4 @@ export const myTable = pgTable('my_table', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
 });
-``` 
+```

@@ -82,7 +82,6 @@ POSTGRES_PASSWORD=postgres
 POSTGRES_DB=minitv
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
-DATABASE_URL="postgres://postgres:postgres@localhost:5432/minitv"
 ```
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

@@ -6,8 +6,14 @@ dotenv.config();
 export default {
   schema: './db/schema/*',
   out: './db/migrations',
-  driver: 'pg',
+  dialect: 'postgresql',
   dbCredentials: {
-    connectionString: process.env.DATABASE_URL!,
+    host: process.env.POSTGRES_HOST || 'localhost',
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DB || 'minitv',
+    port: Number(process.env.POSTGRES_PORT) || 5432,
   },
-} satisfies Config; 
+  verbose: true,
+  strict: true,
+} satisfies Config;
