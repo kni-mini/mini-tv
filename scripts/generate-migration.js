@@ -38,5 +38,5 @@ if (!/^[a-z][a-z0-9_]*(_[a-z0-9]+)*$/.test(name)) {
 try {
   execSync(`drizzle-kit generate --config=drizzle.config.ts --name ${name}`, { stdio: 'inherit' });
 } catch {
-  process.exit(1);
+  handleError('Failed to generate migration. Make sure drizzle-kit is properly configured.');
 }
