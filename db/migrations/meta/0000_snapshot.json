@@ -1,5 +1,5 @@
 {
-  "id": "cfc76587-9439-4229-a1c4-c7a470a39b3d",
+  "id": "482e87af-8b64-40dc-95f9-63edb8b9186b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -214,6 +214,50 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.group_types": {
+      "name": "group_types",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "group_types_name_unique": {
+          "name": "group_types_name_unique",
+          "nullsNotDistinct": false,
+          "columns": ["name"]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.groups": {
       "name": "groups",
       "schema": "",
@@ -236,10 +280,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "type": {
-          "name": "type",
-          "type": "group_type",
-          "typeSchema": "public",
+        "type_id": {
+          "name": "type_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
@@ -282,6 +325,15 @@
         }
       },
       "foreignKeys": {
+        "groups_type_id_group_types_id_fk": {
+          "name": "groups_type_id_group_types_id_fk",
+          "tableFrom": "groups",
+          "tableTo": "group_types",
+          "columnsFrom": ["type_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
         "groups_user_id_users_id_fk": {
           "name": "groups_user_id_users_id_fk",
           "tableFrom": "groups",
@@ -335,6 +387,89 @@
         }
       },
       "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.organizations": {
+      "name": "organizations",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "short_name": {
+          "name": "short_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image_id": {
+          "name": "image_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "organizations_name_index": {
+          "name": "organizations_name_index",
+          "columns": [
+            {
+              "expression": "name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"organizations\".\"deleted_at\" IS NULL",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "organizations_short_name_index": {
+          "name": "organizations_short_name_index",
+          "columns": [
+            {
+              "expression": "short_name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "where": "\"organizations\".\"deleted_at\" IS NULL",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
@@ -456,31 +591,19 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.student_clubs": {
-      "name": "student_clubs",
+    "public.user_organizations": {
+      "name": "user_organizations",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "text",
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
-        "short_name": {
-          "name": "short_name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "image_id": {
-          "name": "image_id",
-          "type": "text",
+        "organization_id": {
+          "name": "organization_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
@@ -498,42 +621,33 @@
           "notNull": false
         }
       },
-      "indexes": {
-        "student_clubs_name_index": {
-          "name": "student_clubs_name_index",
-          "columns": [
-            {
-              "expression": "name",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "where": "\"student_clubs\".\"deleted_at\" IS NULL",
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
+      "indexes": {},
+      "foreignKeys": {
+        "user_organizations_user_id_users_id_fk": {
+          "name": "user_organizations_user_id_users_id_fk",
+          "tableFrom": "user_organizations",
+          "tableTo": "users",
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
         },
-        "student_clubs_short_name_index": {
-          "name": "student_clubs_short_name_index",
-          "columns": [
-            {
-              "expression": "short_name",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "where": "\"student_clubs\".\"deleted_at\" IS NULL",
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
+        "user_organizations_organization_id_organizations_id_fk": {
+          "name": "user_organizations_organization_id_organizations_id_fk",
+          "tableFrom": "user_organizations",
+          "tableTo": "organizations",
+          "columnsFrom": ["organization_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "user_organizations_user_id_organization_id_pk": {
+          "name": "user_organizations_user_id_organization_id_pk",
+          "columns": ["user_id", "organization_id"]
+        }
+      },
       "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
@@ -560,19 +674,6 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
-        },
-        "role": {
-          "name": "role",
-          "type": "user_role",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "student_club_id": {
-          "name": "student_club_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
         },
         "created_at": {
           "name": "created_at",
@@ -606,17 +707,7 @@
           "with": {}
         }
       },
-      "foreignKeys": {
-        "users_student_club_id_student_clubs_id_fk": {
-          "name": "users_student_club_id_student_clubs_id_fk",
-          "tableFrom": "users",
-          "tableTo": "student_clubs",
-          "columnsFrom": ["student_club_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -624,18 +715,7 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {
-    "public.group_type": {
-      "name": "group_type",
-      "schema": "public",
-      "values": ["event", "announcement", "poster"]
-    },
-    "public.user_role": {
-      "name": "user_role",
-      "schema": "public",
-      "values": ["dean", "student_council", "student_club"]
-    }
-  },
+  "enums": {},
   "schemas": {},
   "sequences": {},
   "roles": {},
