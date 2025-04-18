@@ -10,5 +10,5 @@ export const users = pgTable(
     createdAt: timestamp('created_at').defaultNow().notNull(),
     deletedAt: timestamp('deleted_at'),
   },
-  (table) => [uniqueWhenNotDeleted(table, table.username)(index())]
+  (table) => [uniqueWhenNotDeleted(table.deletedAt, table.username)(index())]
 );

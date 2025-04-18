@@ -13,7 +13,7 @@ export const organizations = pgTable(
     deletedAt: timestamp('deleted_at'),
   },
   (table) => [
-    uniqueWhenNotDeleted(table, table.name)(index()),
-    uniqueWhenNotDeleted(table, table.shortName)(index()),
+    uniqueWhenNotDeleted(table.deletedAt, table.name)(index()),
+    uniqueWhenNotDeleted(table.deletedAt, table.shortName)(index()),
   ]
 );

@@ -1,9 +1,8 @@
-import { IndexBuilderOn } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
+import { IndexBuilderOn, PgColumn } from 'drizzle-orm/pg-core';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function uniqueWhenNotDeleted(table: any, indexOn: any) {
+export function uniqueWhenNotDeleted(deletedAt: PgColumn, indexOn: PgColumn) {
   return (index: IndexBuilderOn) => {
-    return index.on(indexOn).where(sql`${table.deletedAt} IS NULL`);
+    return index.on(indexOn).where(sql`${deletedAt} IS NULL`);
   };
 }

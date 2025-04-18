@@ -18,5 +18,5 @@ export const groups = pgTable(
     createdAt: timestamp('created_at').defaultNow().notNull(),
     deletedAt: timestamp('deleted_at'),
   },
-  (table) => [uniqueWhenNotDeleted(table, table.name)(index())]
+  (table) => [uniqueWhenNotDeleted(table.deletedAt, table.name)(index())]
 );
