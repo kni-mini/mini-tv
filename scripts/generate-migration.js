@@ -4,29 +4,34 @@
 const { execSync } = require('child_process');
 const args = process.argv.slice(2);
 
+function handleError(message, example = null) {
+  console.error(`Error: ${message}`);
+  if (example) {
+    console.error(`Example: ${example}`);
+  }
+  process.exit(1);
+}
+
 // Check if name flag is provided
 const nameIndex = args.indexOf('--name');
 if (nameIndex === -1) {
-  console.error(
-    'Error: Migration name is required. Use --name flag with a descriptive name in snake_case format.'
+  handleError(
+    'Migration name is required. Use --name flag with a descriptive name in snake_case format.',
+    'pnpm db:generate --name add_start_end_dates_to_content'
   );
-  console.error('Example: pnpm db:generate --name add_start_end_dates_to_content');
-  process.exit(1);
 }
 
 const name = args[nameIndex + 1];
 if (!name) {
-  console.error('Error: Migration name cannot be empty.');
-  process.exit(1);
+  handleError('Migration name cannot be empty.');
 }
 
 // Validate name format (snake_case)
 if (!/^[a-z][a-z0-9_]*(_[a-z0-9]+)*$/.test(name)) {
-  console.error(
-    'Error: Migration name must be in snake_case format (lowercase letters, numbers, and underscores).'
+  handleError(
+    'Migration name must be in snake_case format (lowercase letters, numbers, and underscores).',
+    'add_start_end_dates_to_content'
   );
-  console.error('Example: add_start_end_dates_to_content');
-  process.exit(1);
 }
 
 // Run drizzle-kit with the provided name and config
