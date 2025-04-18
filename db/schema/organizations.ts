@@ -1,8 +1,8 @@
 import { pgTable, serial, text, timestamp, index } from 'drizzle-orm/pg-core';
 import { uniqueWhenNotDeleted } from './utils';
 
-export const studentClubs = pgTable(
-  'student_clubs',
+export const organizations = pgTable(
+  'organizations',
   {
     id: serial('id').primaryKey(),
     name: text('name').notNull(),
