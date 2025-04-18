@@ -1,5 +1,5 @@
 {
-  "id": "dfaf012b-633f-486a-94cf-7eab507d0ae9",
+  "id": "654288ce-71ad-4143-88a6-86183ea4ab6d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -424,9 +424,9 @@
         },
         "image_id": {
           "name": "image_id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",
@@ -476,7 +476,17 @@
           "with": {}
         }
       },
-      "foreignKeys": {},
+      "foreignKeys": {
+        "organizations_image_id_images_id_fk": {
+          "name": "organizations_image_id_images_id_fk",
+          "tableFrom": "organizations",
+          "tableTo": "images",
+          "columnsFrom": ["image_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},

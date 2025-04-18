@@ -53,7 +53,7 @@ CREATE TABLE "organizations" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"short_name" text NOT NULL,
-	"image_id" text NOT NULL,
+	"image_id" integer,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"deleted_at" timestamp
 );
@@ -92,6 +92,7 @@ ALTER TABLE "events" ADD CONSTRAINT "events_group_id_groups_id_fk" FOREIGN KEY (
 ALTER TABLE "events" ADD CONSTRAINT "events_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "groups" ADD CONSTRAINT "groups_type_id_group_types_id_fk" FOREIGN KEY ("type_id") REFERENCES "public"."group_types"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "groups" ADD CONSTRAINT "groups_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "organizations" ADD CONSTRAINT "organizations_image_id_images_id_fk" FOREIGN KEY ("image_id") REFERENCES "public"."images"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "posters" ADD CONSTRAINT "posters_image_id_images_id_fk" FOREIGN KEY ("image_id") REFERENCES "public"."images"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "posters" ADD CONSTRAINT "posters_group_id_groups_id_fk" FOREIGN KEY ("group_id") REFERENCES "public"."groups"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "posters" ADD CONSTRAINT "posters_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
