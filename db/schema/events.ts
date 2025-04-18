@@ -11,6 +11,7 @@ export const events = pgTable(
     startsAt: timestamp('starts_at').notNull(),
     endsAt: timestamp('ends_at').notNull(),
     allDay: boolean('all_day').notNull().default(false),
+    description: text('description'),
     groupId: integer('group_id').references(() => groups.id),
     userId: integer('user_id')
       .notNull()

@@ -70,6 +70,7 @@ Each schema is defined in a separate file under the `db/schema` directory. This 
 - `starts_at`: Event start time
 - `ends_at`: Event end time
 - `all_day`: Whether the event is all-day
+- `description`: Description of the event (optional)
 - `group_id`: Foreign key to groups table (optional)
 - `user_id`: Foreign key to users table
 - `created_at`: Creation timestamp

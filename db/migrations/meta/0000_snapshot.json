@@ -1,5 +1,5 @@
 {
-  "id": "482e87af-8b64-40dc-95f9-63edb8b9186b",
+  "id": "dfaf012b-633f-486a-94cf-7eab507d0ae9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -143,6 +143,12 @@
           "primaryKey": false,
           "notNull": true,
           "default": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "group_id": {
           "name": "group_id",

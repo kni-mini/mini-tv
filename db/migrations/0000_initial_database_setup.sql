@@ -16,6 +16,7 @@ CREATE TABLE "events" (
 	"starts_at" timestamp NOT NULL,
 	"ends_at" timestamp NOT NULL,
 	"all_day" boolean DEFAULT false NOT NULL,
+	"description" text,
 	"group_id" integer,
 	"user_id" integer NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
