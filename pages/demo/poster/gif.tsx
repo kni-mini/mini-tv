@@ -32,8 +32,6 @@ const GifPage: React.FC = () => {
         type="gif"
         src="/demo-media/sample.gif"
         alt="Sample animated GIF"
-        width={width}
-        height={height}
         loop
       />
     </div>
