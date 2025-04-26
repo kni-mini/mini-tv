@@ -31,8 +31,6 @@ const VideoPage: React.FC = () => {
       <Poster
         type="video"
         src="/demo-media/sample.mp4"
-        width={width}
-        height={height}
         autoplay
         loop
         muted

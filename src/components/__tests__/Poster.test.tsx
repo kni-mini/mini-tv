@@ -3,8 +3,6 @@
 import { render, screen } from '@testing-library/react'
 import Poster from '../Poster'
 
-// …rest of your tests…
-
 
 
 
