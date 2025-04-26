@@ -1,14 +1,15 @@
-/* src/components/Poster.module.css */
+/* Poster.module.css */
 .container {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;        /* example token */
-    background: #000;          /* fallback */
-  }
+  position: relative;
+  overflow: hidden;
+  background: #000;
   
-  .media {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
+  /* make it fill whatever parent it sits in */
+  width: 100%;
+  height: 100%;
+}
+.media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
