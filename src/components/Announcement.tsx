@@ -28,10 +28,15 @@ export default function Announcement({
   mediaId,
 }: AnnouncementProps) {
   const media = sampleMedia.find(m => m.id === mediaId);
+  const truncatedMessage = message.length > 300 ? message.slice(0, 300) + '…' : message;
+  const hasMedia = Boolean(media);
 
   return (
-    <div>
-      <p>{message}</p>
+    <div
+      className={`bg-white shadow-lg rounded-xl p-4 flex flex-col gap-4 ${
+      hasMedia ? 'min-h-[30vh]' : 'min-h-[15vh]'}`}
+      >
+      <p className="text-gray-700 text-base">{truncatedMessage}</p>
       {media && (
         <Media
           id={media.id}

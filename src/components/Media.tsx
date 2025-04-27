@@ -25,30 +25,32 @@ export default function Media({
     const renderMedia = () => {
         if (mediaType === 'video') {
           return (
-            <figure>
+            <figure className="relative w-full aspect-video overflow-hidden rounded-lg">
               <video
+                className="w-full h-auto rounded-lg"
                 src={file}
                 aria-label={alt || 'Announcement video'}
                 controls
                 preload="metadata"
                 playsInline
-                autoPlay={true}
-                loop={true}
+                autoPlay
+                loop
                 muted={false}
               />
-              {caption && <figcaption>{caption}</figcaption>}
+              {caption && <figcaption className="text-sm text-gray-500 mt-2 text-center">{caption}</figcaption>}
             </figure>
           );
         }
         else if (mediaType === 'image')
         {
             return (
-            <figure>
+            <figure className="relative w-full aspect-video overflow-hidden rounded-lg">
               <Image
+                className="w-full h-auto rounded-lg"
                 src={file}
                 alt={alt || 'Announcement image'}
                 objectFit="contain"
-                fill={true}
+                fill
               />
             </figure>
             );
@@ -56,19 +58,19 @@ export default function Media({
         else if (mediaType === 'gif')
         {
             return (
-            <figure >
+            <figure className="relative w-full aspect-video overflow-hidden rounded-lg">
               <Image
+                className="w-auto h-full rounded-lg"
                 src={file}
                 alt={alt || 'Announcement gif'}
                 objectFit="contain"
-                fill={true}
+                fill
                 unoptimized={true}
               />
             </figure>
             );
         }
     
-
         return <></>
       };
 

@@ -7,7 +7,7 @@ import { Timestamp } from 'next/dist/server/lib/cache-handlers/types';
 export const sampleMedia: MediaProps[] =   [
   {
     id: 1,
-    file: '/demo-media/integral-fest.jpg',
+    file: '/demo-media/integral-fest.png',
     name: 'Integral fest',
     createdAt: new Date() as unknown as Timestamp,
     mediaType: 'image',
