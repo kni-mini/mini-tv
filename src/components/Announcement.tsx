@@ -1,80 +1,49 @@
-import styles from './Announcement.module.css';
-import Image from 'next/image'
+import { Timestamp } from 'next/dist/server/lib/cache-handlers/types';
+import Media, { MediaProps } from './Media';
+import React from 'react';
+import {sampleMedia} from '@/sampleData'
 
 export type AnnouncementProps = {
-  id: string;
+  id: number;
+  name: string;
   message: string;
-  mediaSrc?: string;
-  mediaType?: 'image' | 'video' | 'gif';
-  alt?: string;
-  caption?: string;
+  groupId?: number;
+  userId: number;
+  startDate: Timestamp;
+  endDate?: Timestamp;
+  createdAt: Timestamp;
+  deletedAt?: Timestamp;
+  mediaId?: number;
 }
 
 export default function Announcement({
+  name,
   message,
-  mediaSrc,
-  mediaType,
-  alt,
-  caption,
+  groupId,
+  userId,
+  startDate,
+  endDate,
+  createdAt,
+  deletedAt,
+  mediaId,
 }: AnnouncementProps) {
-  const renderMedia = () => {
-    if (!mediaSrc || !mediaType) return null;
-
-    if (mediaType === 'video') {
-      return (
-        <figure className={styles.container}>
-          <video
-            data-testid="poster-video"
-            className={styles.media}
-            src={mediaSrc}
-            aria-label={alt || 'Announcement video'}
-            controls
-            preload="metadata"
-            playsInline
-            autoPlay={true}
-            loop={true}
-            muted={false}
-          />
-          {caption && <figcaption className={styles.caption}>{caption}</figcaption>}
-        </figure>
-      );
-    }
-    else if(mediaType === 'image')
-    {
-        return (
-        <figure className={styles.container}>
-          <Image
-            src={mediaSrc}
-            alt={alt || 'Announcement image'}
-            objectFit="contain"
-            fill={true}
-          />
-        </figure>
-        );
-    }
-    else if(mediaType === 'gif')
-    {
-        return (
-        <figure className={styles.container}>
-          <Image
-            src={mediaSrc}
-            alt={alt || 'Announcement gif'}
-            objectFit="contain"
-            fill={true}
-            unoptimized={true}
-          />
-        </figure>
-        );
-    }
-
-
-    return <></>
-  };
+  const media = sampleMedia.find(m => m.id === mediaId);
 
   return (
-    <div className={styles.card}>
-      <p className={styles.message}>{message}</p>
-      {renderMedia()}
+    <div>
+      <p>{message}</p>
+      {media && (
+        <Media
+          id={media.id}
+          file={media.file}
+          name={media.name}
+          createdAt={media.createdAt}
+          deleteAt={media.deleteAt}
+          alt={media.alt}
+          caption={media.caption}
+          mediaType={media.mediaType}
+        />
+      )}
     </div>
   );
 }
