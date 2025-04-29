@@ -39,10 +39,10 @@ export default function Announcement({
   return (
     <div
       className={`relative bg-white rounded-xl p-4 flex flex-row gap-4 ${
-      hasMedia ? 'h-[30cqh]' : 'h-[15cqh]'}`}>
-        <div className="flex-1 flex flex-col">
+      hasMedia ? 'max-h-[30cqh] min-h-[25cqh]' : 'max-h-[20cqh] min-h-[15cqh]'}`}>
+        <div className="flex-1 flex flex-col justify-center">
           <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">{name}</h2>
-          <p className="text-gray-800" style={{ fontSize: 'clamp(0.65rem, 1.5vw, 1.125rem)' }}>{truncatedMessage}</p>
+          <p className="text-gray-800" style={{ fontSize: 'clamp(0.65rem, 2vw, 1.125rem)' }}>{truncatedMessage}</p>
         </div>
       {media && (
         <figure className="relative object-contain aspect-video max-h-full max-w-[50%] rounded-lg">
