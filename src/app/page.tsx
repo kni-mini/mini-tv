@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -49,7 +50,12 @@ export default function Home() {
           >
             Read our docs
           </a>
-        </div>
+          </div>
+          <div className="text-sm text-gray-500">
+            🚀 This is a new row below the buttons! Check out 
+            <Link href="/Components"
+                  className="StudentClubAnnouncementComponent hover:underline"> Component</Link>
+          </div> 
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
