@@ -18,14 +18,13 @@ export default function AnnouncementsBoard() {
     <div className="max-w-7xl mx-auto p-6">
       <h1 className="text-4xl font-bold mb-6 text-center">Dean Announcements</h1>
       <div className="h-[80vh] @container flex flex-col gap-4">
-
         {currentPage.map((a) => (
           <Announcement key={a.id} {...a} />
         ))}
       </div>
 
 
-      <div className="flex justify-center mt-8 gap-4">
+      <div className="flex justify-center mt-6 gap-6">
         <button
           disabled={currentPageIndex === 0}
           onClick={() => setCurrentPageIndex((i) => Math.max(i - 1, 0))}

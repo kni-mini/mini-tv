@@ -24,53 +24,57 @@ export default function Media({
     const renderMedia = () => {
         if (mediaType === 'video') {
           return (
-            <figure className="object-contain max-h-full max-w-full rounded-lg">
+            <figure className="flex flex-col w-full h-full">
+            <div className="flex-1 min-h-0 overflow-auto">
               <video
-                className="object-contain max-h-full max-w-full rounded-lg"
-                src={file}
-                aria-label={alt || 'Announcement video'}
-                controls
-                preload="metadata"
-                playsInline
-                autoPlay
-                loop
-                muted={false}
-              />
-              {caption && <figcaption className="text-sm text-gray-500 mt-2 text-center">{caption}</figcaption>}
+                className="w-full h-full object-contain rounded-lg"
+                  src={file}
+                  aria-label={alt || 'Announcement video'}
+                  controls
+                  preload="metadata"
+                  playsInline
+                  autoPlay
+                  loop
+                  muted={false}
+                />
+              </div>
+              {caption && (
+                <figcaption className="text-xs text-gray-500 text-center px-2">
+                  {caption}
+                </figcaption>
+              )}
             </figure>
           );
         }
-        else if (mediaType === 'image')
-        {
-            return (
-            <figure className="object-contain max-h-full max-w-full rounded-lg">
+        else if (mediaType === 'image') {
+          return (
+            <div className="relative w-full h-full">
               <Image
-                className="object-contain"
+                className="object-contain rounded-lg"
                 src={file}
-                alt={alt || 'Announcement image'}
+                alt={alt || `Announcement image`}
                 fill
               />
-            </figure>
-            );
+            </div>
+          );
         }
         else if (mediaType === 'gif')
         {
             return (
-            <figure className="relative w-full aspect-video overflow-hidden rounded-lg">
-              <Image
-                className="w-auto h-full rounded-lg"
-                src={file}
-                alt={alt || 'Announcement gif'}
-                objectFit="contain"
-                fill
-                unoptimized={true}
-              />
-            </figure>
+              <div className="relative w-full h-full">
+                <Image
+                  className="object-contain rounded-lg"
+                  src={file}
+                  alt={alt || `Announcement gif`}
+                  fill
+                  unoptimized={true}
+                />
+              </div>
             );
         }
     
         return <></>
       };
 
-      return (<div> {renderMedia()} </div>)
+      return (renderMedia())
 }

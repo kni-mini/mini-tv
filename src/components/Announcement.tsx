@@ -38,14 +38,16 @@ export default function Announcement({
 
   return (
     <div
-      className={`relative bg-white rounded-xl p-4 flex flex-col gap-4 ${
+      className={`relative bg-white rounded-xl p-4 flex flex-row gap-4 ${
       hasMedia ? 'h-[30cqh]' : 'h-[15cqh]'}`}>
-      <p className="text-gray-800 text-sm flex-1">{truncatedMessage}</p>
-      {media && (
-        <div className="flex-1 overflow-hidden flex items-center justify-center">
-          <Media {...media} />
+        <div className="flex-1 flex flex-col">
+          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">{name}</h2>
+          <p className="text-gray-800" style={{ fontSize: 'clamp(0.65rem, 1.5vw, 1.125rem)' }}>{truncatedMessage}</p>
         </div>
-      )}
+      {media && (
+        <figure className="relative object-contain aspect-video max-h-full max-w-[50%] rounded-lg">
+        <Media {...media}/>
+        </figure>)}
     </div>
   );
 }
