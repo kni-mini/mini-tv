@@ -9,11 +9,13 @@ export function paginateAnnouncements(announcements: AnnouncementProps[]): Annou
   let currentPage: WeightedAnnouncement[] = [];
   let currentWeight = 0;
 
-  for (const announcement of announcements) {
+  for (const announcement of announcements) 
+  {
     const hasMedia = announcement.mediaId !== undefined;
     const weight = hasMedia ? 30 : 20;
 
-    if (currentWeight + weight > 100) {
+    if (currentWeight + weight > 100) 
+    {
       pages.push(currentPage.map(a => ({ ...a })));
       currentPage = [];
       currentWeight = 0;
@@ -23,7 +25,8 @@ export function paginateAnnouncements(announcements: AnnouncementProps[]): Annou
     currentWeight += weight;
   }
 
-  if (currentPage.length > 0) {
+  if (currentPage.length > 0) 
+  {
     pages.push(currentPage.map(a => ({ ...a })));
   }
 

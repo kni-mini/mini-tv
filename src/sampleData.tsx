@@ -2,14 +2,18 @@ import React from 'react';
 import Announcement from '@/components/Announcement';
 import type { AnnouncementProps } from '@/components/Announcement';
 import Media, { MediaProps } from '@/components//Media';
-import { Timestamp } from 'next/dist/server/lib/cache-handlers/types';
+
+const now = new Date();
+const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+const nextWeek = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
 
 export const sampleMedia: MediaProps[] =   [
   {
     id: 1,
     file: '/demo-media/integral-fest.png',
     name: 'Integral fest',
-    createdAt: new Date() as unknown as Timestamp,
+    createdAt: now,
     mediaType: 'image',
     alt: 'Integral Fest image',
   },
@@ -17,7 +21,7 @@ export const sampleMedia: MediaProps[] =   [
     id: 2,
     file: '/demo-media/sample.mp4',
     name: 'Introduction Video',
-    createdAt: new Date() as unknown as Timestamp,
+    createdAt: now,
     mediaType: 'video',
     alt: 'Language classes video',
     caption: 'Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025',
@@ -26,7 +30,7 @@ export const sampleMedia: MediaProps[] =   [
     id: 3,
     file: '/demo-media/library.gif',
     name: 'Library Course Announcement',
-    createdAt: new Date() as unknown as Timestamp,
+    createdAt: now,
     mediaType: 'gif',
     alt: 'Library animation',
   },
@@ -40,9 +44,9 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     message: '08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest.',
     groupId: 1,
     userId: 101,
-    startDate: new Date() as unknown as Timestamp,
-    endDate: new Date() as unknown as Timestamp,
-    createdAt: new Date() as unknown as Timestamp,
+    startDate: yesterday,
+    endDate: tomorrow,
+    createdAt: now,
     mediaId: 1,
   },
   {
@@ -51,9 +55,9 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     message: 'Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025',
     groupId: 2,
     userId: 102,
-    startDate: new Date() as unknown as Timestamp,
-    endDate: new Date() as unknown as Timestamp,
-    createdAt: new Date() as unknown as Timestamp,
+    startDate: now,
+    endDate: nextWeek,
+    createdAt: now,
     mediaId: 2, 
   },
   {
@@ -62,9 +66,9 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
-    startDate: new Date() as unknown as Timestamp,
-    endDate: new Date() as unknown as Timestamp,
-    createdAt: new Date() as unknown as Timestamp,
+    startDate: yesterday,
+    endDate: tomorrow,
+    createdAt: now,
     mediaId: undefined, 
   },
   {
@@ -73,9 +77,9 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
-    startDate: new Date() as unknown as Timestamp,
-    endDate: new Date() as unknown as Timestamp,
-    createdAt: new Date() as unknown as Timestamp,
+    startDate: tomorrow,
+    endDate: nextWeek,
+    createdAt: now,
     mediaId: undefined, 
   },
   {
@@ -84,9 +88,9 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
-    startDate: new Date() as unknown as Timestamp,
-    endDate: new Date() as unknown as Timestamp,
-    createdAt: new Date() as unknown as Timestamp,
+    startDate: new Date('2025-01-01'),
+    endDate: new Date('2025-02-01'),
+    createdAt: now,
     mediaId: undefined, 
   },
   {
@@ -95,9 +99,20 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
-    startDate: new Date() as unknown as Timestamp,
-    endDate: new Date() as unknown as Timestamp,
-    createdAt: new Date() as unknown as Timestamp,
+    startDate: yesterday,
+    endDate: nextWeek,
+    createdAt: now,
     mediaId: 3, 
+  },
+  {
+    id: 7,
+    name: 'Library Course again...',
+    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
+    groupId: 3,
+    userId: 103,
+    startDate: new Date('2025-04-01'),
+    endDate: new Date('2025-05-05'),
+    createdAt: now,
+    mediaId: undefined, 
   },
 ];

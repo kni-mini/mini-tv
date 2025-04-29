@@ -1,4 +1,3 @@
-import { Timestamp } from 'next/dist/server/lib/cache-handlers/types';
 import Image from 'next/image'
 import React from 'react';
 
@@ -6,8 +5,8 @@ export type MediaProps = {
     id: number;
     file: string;
     name?: string,
-    createdAt: Timestamp;
-    deleteAt?: Timestamp;
+    createdAt: Date;
+    deleteAt?: Date;
     alt?: string;
     caption?: string;
     mediaType: 'image' | 'video' | 'gif';
@@ -25,9 +24,9 @@ export default function Media({
     const renderMedia = () => {
         if (mediaType === 'video') {
           return (
-            <figure className="relative w-full aspect-video overflow-hidden rounded-lg">
+            <figure className="object-contain max-h-full max-w-full rounded-lg">
               <video
-                className="w-full h-auto rounded-lg"
+                className="object-contain max-h-full max-w-full rounded-lg"
                 src={file}
                 aria-label={alt || 'Announcement video'}
                 controls
@@ -44,12 +43,11 @@ export default function Media({
         else if (mediaType === 'image')
         {
             return (
-            <figure className="relative w-full aspect-video overflow-hidden rounded-lg">
+            <figure className="object-contain max-h-full max-w-full rounded-lg">
               <Image
-                className="w-full h-auto rounded-lg"
+                className="object-contain"
                 src={file}
                 alt={alt || 'Announcement image'}
-                objectFit="contain"
                 fill
               />
             </figure>

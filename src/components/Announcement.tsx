@@ -1,4 +1,3 @@
-import { Timestamp } from 'next/dist/server/lib/cache-handlers/types';
 import Media, { MediaProps } from './Media';
 import React from 'react';
 import {sampleMedia} from '@/sampleData'
@@ -9,10 +8,10 @@ export type AnnouncementProps = {
   message: string;
   groupId?: number;
   userId: number;
-  startDate: Timestamp;
-  endDate?: Timestamp;
-  createdAt: Timestamp;
-  deletedAt?: Timestamp;
+  startDate: Date;
+  endDate?: Date;
+  createdAt: Date;
+  deletedAt?: Date;
   mediaId?: number;
 }
 
@@ -27,27 +26,25 @@ export default function Announcement({
   deletedAt,
   mediaId,
 }: AnnouncementProps) {
+  const now = new Date();
+
+  if (now < startDate || (endDate && now > endDate)) {
+    return null;
+  }
+
   const media = sampleMedia.find(m => m.id === mediaId);
   const truncatedMessage = message.length > 300 ? message.slice(0, 300) + '…' : message;
   const hasMedia = Boolean(media);
 
   return (
     <div
-      className={`bg-white shadow-lg rounded-xl p-4 flex flex-col gap-4 ${
-      hasMedia ? 'min-h-[30vh]' : 'min-h-[15vh]'}`}
-      >
-      <p className="text-gray-700 text-base">{truncatedMessage}</p>
+      className={`relative bg-white rounded-xl p-4 flex flex-col gap-4 ${
+      hasMedia ? 'h-[30cqh]' : 'h-[15cqh]'}`}>
+      <p className="text-gray-800 text-sm flex-1">{truncatedMessage}</p>
       {media && (
-        <Media
-          id={media.id}
-          file={media.file}
-          name={media.name}
-          createdAt={media.createdAt}
-          deleteAt={media.deleteAt}
-          alt={media.alt}
-          caption={media.caption}
-          mediaType={media.mediaType}
-        />
+        <div className="flex-1 overflow-hidden flex items-center justify-center">
+          <Media {...media} />
+        </div>
       )}
     </div>
   );
