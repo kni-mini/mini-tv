@@ -6,28 +6,40 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:generate": "node scripts/generate-migration.js",
+    "db:migrate": "drizzle-kit push",
+    "db:dev:up": "docker-compose -f docker-compose.dev.yml up -d",
+    "db:dev:down": "docker-compose -f docker-compose.dev.yml down",
+    "db:prod:up": "docker-compose -f docker-compose.prod.yml up -d",
+    "db:prod:down": "docker-compose -f docker-compose.prod.yml down",
+    "prepare": "husky"
   },
   "dependencies": {
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.43.1",
+    "@types/pg": "^8.11.13",,
     "next": "15.3.0",
-    "pg": "^8.15.6",
+    "postgres": "^3.4.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/pg": "^8.11.14",
+    "tsx": "^4.19.4",
+    "@types/node": "^20.17.30",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.30.1",
+    "@typescript-eslint/parser": "^8.30.1",
     "drizzle-kit": "^0.31.0",
-    "eslint": "^9",
+    "eslint": "^9.24.0",
     "eslint-config-next": "15.3.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.1",
+    "prettier": "^3.5.3",
     "tailwindcss": "^4",
-    "tsx": "^4.19.4",
     "typescript": "^5"
   }
 }
