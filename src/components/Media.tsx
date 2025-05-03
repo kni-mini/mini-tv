@@ -9,6 +9,7 @@ export type MediaProps = {
     deleteAt?: Date;
     alt?: string;
     caption?: string;
+    autoPlay?: boolean;
     mediaType: 'image' | 'video' | 'gif';
   }
 
@@ -19,6 +20,7 @@ export default function Media({
   deleteAt,
   alt,
   caption,
+  autoPlay,
   mediaType,
 } : MediaProps) {
     const renderMedia = () => {
@@ -33,7 +35,7 @@ export default function Media({
                   controls
                   preload="metadata"
                   playsInline
-                  autoPlay
+                  autoPlay={autoPlay || true}
                   loop
                   muted={false}
                 />

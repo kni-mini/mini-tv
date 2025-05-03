@@ -1,4 +1,4 @@
-import Media, { MediaProps } from './Media';
+import Media, { MediaProps } from '@/components/Media';
 import React from 'react';
 import {sampleMedia} from '@/sampleData'
 
@@ -6,6 +6,7 @@ export type AnnouncementProps = {
   id: number;
   name: string;
   message: string;
+  maxMessLength?: number;
   groupId?: number;
   userId: number;
   startDate: Date;
@@ -18,6 +19,7 @@ export type AnnouncementProps = {
 export default function Announcement({
   name,
   message,
+  maxMessLength,
   groupId,
   userId,
   startDate,
@@ -28,12 +30,16 @@ export default function Announcement({
 }: AnnouncementProps) {
   const now = new Date();
 
-  if (now < startDate || (endDate && now > endDate)) {
+  if (now < startDate || (endDate && now > endDate) || (deletedAt && now > deletedAt)) {
     return null;
   }
 
   const media = sampleMedia.find(m => m.id === mediaId);
-  const truncatedMessage = message.length > 300 ? message.slice(0, 300) + '…' : message;
+  let truncatedMessage = message;
+  if (maxMessLength && message.length > maxMessLength)
+  {
+    truncatedMessage = message.slice(0, maxMessLength) + '…';
+  }
   const hasMedia = Boolean(media);
 
   return (
