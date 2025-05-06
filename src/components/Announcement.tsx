@@ -1,12 +1,12 @@
 import Media, { MediaProps } from '@/components/Media';
 import React from 'react';
 import {sampleMedia} from '@/sampleData'
+import {ANNOUNCEMENT_MAX_MESSAGE_LENGTH} from '@/app/constants'
 
 export type AnnouncementProps = {
   id: number;
   name: string;
   message: string;
-  maxMessLength?: number;
   groupId?: number;
   userId: number;
   startDate: Date;
@@ -19,7 +19,6 @@ export type AnnouncementProps = {
 export default function Announcement({
   name,
   message,
-  maxMessLength,
   groupId,
   userId,
   startDate,
@@ -35,11 +34,7 @@ export default function Announcement({
   }
 
   const media = sampleMedia.find(m => m.id === mediaId);
-  let truncatedMessage = message;
-  if (maxMessLength && message.length > maxMessLength)
-  {
-    truncatedMessage = message.slice(0, maxMessLength) + '...';
-  }
+  const truncatedMessage = (message.length > ANNOUNCEMENT_MAX_MESSAGE_LENGTH) ? (message.slice(0, ANNOUNCEMENT_MAX_MESSAGE_LENGTH) + '...') : message;
   const hasMedia = Boolean(media);
 
   return (

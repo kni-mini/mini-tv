@@ -43,7 +43,6 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     id: 1,
     name: 'Dean Office Hours',
     message: '08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest.',
-    maxMessLength: 300,
     groupId: 1,
     userId: 101,
     startDate: yesterday,

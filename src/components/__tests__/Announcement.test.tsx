@@ -4,6 +4,7 @@ import Media, {MediaProps} from "@/components/Media";
 import { sampleMedia } from '@/sampleData';
 import React from 'react';
 import '@testing-library/jest-dom';
+import {ANNOUNCEMENT_MAX_MESSAGE_LENGTH} from '@/app/constants'
 
 
 describe('Announcement', () => {
@@ -41,13 +42,11 @@ describe('Announcement', () => {
   });
 
   it('truncates message when over maxMessLength', () => {
-    const maxMessLengthTest = 10;
-    const expectedTruncatedMessage = 'a'.repeat(maxMessLengthTest) + "...";
+    const expectedTruncatedMessage = 'a'.repeat(ANNOUNCEMENT_MAX_MESSAGE_LENGTH) + "...";
     render(
       <Announcement
         {...announcementTestProps}
-        message={'a'.repeat(200)}
-        maxMessLength={maxMessLengthTest}
+        message={'a'.repeat(ANNOUNCEMENT_MAX_MESSAGE_LENGTH * 2)}
       />
     );
     expect(screen.getByText(expectedTruncatedMessage)).toBeInTheDocument();
