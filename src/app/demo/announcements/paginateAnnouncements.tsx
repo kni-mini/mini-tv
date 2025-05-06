@@ -12,8 +12,11 @@ export function paginateAnnouncements(announcements: AnnouncementProps[]): Annou
 
   for (const announcement of announcements) 
   {
-    if (announcement.deletedAt) continue;
-    if (announcement.startDate && new Date(announcement.startDate) > now) continue;
+    if ((announcement.startDate && announcement.startDate > now) ||
+      (announcement.endDate && announcement.endDate < now) ||
+      (announcement.deletedAt && announcement.deletedAt < now)) {
+      continue;
+    }
 
     const hasMedia = announcement.mediaId !== undefined;
     const weight = hasMedia ? 30 : 20;
