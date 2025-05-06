@@ -9,6 +9,8 @@ interface AnnouncementCardProps {
   mediaType?: "image" | "gif" | "video";
 }
 
+const maxLen = 300
+
 export default function ClubAnnouncement({ 
     title, 
     body,
@@ -17,14 +19,14 @@ export default function ClubAnnouncement({
     mediaSrc,
     mediaType}
     : AnnouncementCardProps) {
-    body = body.length > 300 ? body.slice(0, 300) + "..." : body; // max chars
+    body = body.length > maxLen ? body.slice(0, maxLen) + "..." : body; // max chars
 
     return (
       <div className="w-full max-w-4xl min-h-[200px] grid grid-rows-[60px_80px_1fr] bg-white dark:bg-gray-800 shadow-xl rounded-2xl overflow-hidden">
       
             {/* Row 1: Club Logo */}
-            <div className="flex items-center justify-start px-8 py-4 my-4 bg-white">
-            <Image src={logoSrc} width={32} height={32} className="rounded-full" alt="Club Logo" />
+            <div className="flex items-center gap-2 px-8 py-4 my-4 bg-white">
+            <Image src={logoSrc} width={32} height={32} className="rounded-full object-contain" alt="Club Logo" />
             <p>{clubName}</p>
             </div>
 
@@ -40,23 +42,28 @@ export default function ClubAnnouncement({
 
             {/* OPTIONAL MEDIA*/}
             {mediaSrc && (
-                <div className="mt-4 rounded-lg overflow-hidden">
-                {mediaType === "image" || mediaType === "gif" ? (
+            <>
+                {(mediaType === "image" || mediaType === "gif") && (
+                <div className="relative w-full max-w-md h-[250px] mx-auto mt-4">
                     <Image
                     src={mediaSrc}
                     alt="Announcement Media"
-                    width={200}
-                    height={100}
+                    fill
                     unoptimized
-                    className="px-50 w-full h-auto object-contain rounded"
+                    className="object-contain w-full h-auto rounded-lg"
                     />
-                ) : mediaType === "video" ? (
+                </div>
+                )}
+
+                {mediaType === "video" && (
+                <div className="mt-4 rounded-lg overflow-hidden">
                     <video controls className="w-full h-auto rounded-lg">
                     <source src={mediaSrc} type="video/mp4" />
                     Your browser does not support the video tag.
                     </video>
-                ) : null}
                 </div>
+                )}
+            </>
             )}
         </div>
     );
