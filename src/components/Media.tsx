@@ -10,7 +10,7 @@ export type MediaProps = {
     alt?: string;
     caption?: string;
     autoPlay?: boolean;
-    mediaType: 'image' | 'video' | 'gif';
+    mediaType: string;
   }
 
 export default function Media({
@@ -23,8 +23,18 @@ export default function Media({
   autoPlay,
   mediaType,
 } : MediaProps) {
+  const now = new Date();
+  if (deleteAt && deleteAt <= now) {
+    return (
+      <div className="w-full h-full text-center text-sm text-red-500 p-2">
+        This media has been deleted.
+      </div>
+    );
+    }
+
     const renderMedia = () => {
-        if (mediaType === 'video') {
+      switch (mediaType) {
+        case 'video':
           return (
             <figure className="flex flex-col w-full h-full">
             <div className="flex-1 min-h-0 overflow-auto">
@@ -35,7 +45,7 @@ export default function Media({
                   controls
                   preload="metadata"
                   playsInline
-                  autoPlay={autoPlay || true}
+                  autoPlay={autoPlay ?? true}
                   loop
                   muted={false}
                 />
@@ -47,8 +57,8 @@ export default function Media({
               )}
             </figure>
           );
-        }
-        else if (mediaType === 'image') {
+
+        case 'image':
           return (
             <div className="relative w-full h-full">
               <Image
@@ -59,9 +69,8 @@ export default function Media({
               />
             </div>
           );
-        }
-        else if (mediaType === 'gif')
-        {
+
+        case 'gif':
             return (
               <div className="relative w-full h-full">
                 <Image
@@ -73,10 +82,15 @@ export default function Media({
                 />
               </div>
             );
+
+        default:
+          return (
+            <div className="w-full h-full text-center text-sm text-red-500 p-2">
+              Unsupported media type: {mediaType}
+            </div>
+          );
         }
-    
-        return <></>
       };
 
-      return (renderMedia())
+      return renderMedia()
 }

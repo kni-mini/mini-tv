@@ -38,7 +38,7 @@ export default function Announcement({
   let truncatedMessage = message;
   if (maxMessLength && message.length > maxMessLength)
   {
-    truncatedMessage = message.slice(0, maxMessLength) + '…';
+    truncatedMessage = message.slice(0, maxMessLength) + '...';
   }
   const hasMedia = Boolean(media);
 
