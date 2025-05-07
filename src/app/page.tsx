@@ -1,10 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-export default function Home({children}:{children: React.ReactNode}) {
-  return(
+import React from 'react';
 
-      <main>{children}</main>
-
+export default function Home({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <main>{children}</main>
+      </body>
+    </html>
   );
 }
