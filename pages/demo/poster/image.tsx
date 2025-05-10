@@ -7,8 +7,9 @@ export default function ImagePage() {
       style={{
         position: 'relative',
         width: '100vw',
-        height: '100vh',
+        height: '95.6vh',
         background: '#000',
+
       }}
     >
       <Poster
