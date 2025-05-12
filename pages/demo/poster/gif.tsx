@@ -24,7 +24,7 @@ const GifPage: React.FC = () => {
       style={{
         position: 'relative',
         width:  '100vw',
-        height: '95.6vh',
+        height: '91vh',
         background: '#000',
       }}
     >

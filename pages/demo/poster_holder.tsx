@@ -19,12 +19,12 @@ const PosterHolder: React.FC<PosterHolderProps> = ({ src, alt, loop, className }
     <div className="flex flex-col h-screen w-screen bg-black overflow-hidden">
        <header
         style={{
-          height: '1.5vh',
+          height: '4.0vh',
           padding: '0.3rem',
           background: 'black',
           color: 'white',
           textAlign: 'center',
-          fontSize: '1.5vh',  
+          fontSize: '3vh',  
         }}
       >
         {timeString}
@@ -38,12 +38,12 @@ const PosterHolder: React.FC<PosterHolderProps> = ({ src, alt, loop, className }
       
       <footer
         style={{
-          height: '1.8vh',
+          height: '4.0vh',
           padding: '0.5rem',
           background: 'black',
           color: 'white',
           textAlign: 'center',
-          fontSize: '1.5vh',
+          fontSize: '3.0vh',
           
         }}
       >
