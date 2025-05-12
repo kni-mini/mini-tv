@@ -21,15 +21,7 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "dependencies": {
-    "@types/pg": "^8.11.13",
-    "dotenv": "^16.5.0",
-    "drizzle-orm": "^0.43.1",
-    "next": "15.3.0",
-    "postgres": "^3.4.5",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
+
   "devDependencies": {
     "@babel/preset-env": "^7.27.1",
     "@babel/preset-react": "^7.27.1",
