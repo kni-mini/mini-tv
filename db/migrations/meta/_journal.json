@@ -29,6 +29,13 @@
       "when": 1747156730757,
       "tag": "0003_user_switch_username_to_email",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1747157178184,
+      "tag": "0004_change_images_table_name_to_medias",
+      "breakpoints": true
     }
   ]
 }
