@@ -16,7 +16,11 @@ export default function LoginForm() {
     try {
       await login({ email, password });
     } catch (err) {
-      setError(err.message || 'Login failed. Please check your credentials.');
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Login failed. Please check your credentials.');
+      }
     }
   };
 
