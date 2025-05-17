@@ -9,4 +9,4 @@ export const medias = pgTable('medias', {
   type: mediaTypeEnum('type').notNull(), // image, gif, video
   createdAt: timestamp('created_at').defaultNow().notNull(),
   deletedAt: timestamp('deleted_at'),
-}); 
+});
