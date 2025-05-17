@@ -36,6 +36,13 @@
       "when": 1747157178184,
       "tag": "0004_change_images_table_name_to_medias",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1747488034039,
+      "tag": "0005_seed-users",
+      "breakpoints": true
     }
   ]
 }
