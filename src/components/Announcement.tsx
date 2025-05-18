@@ -1,4 +1,4 @@
-import Media, { MediaProps } from '@/components/Media';
+import Media, { MediaProps } from '@/Components/Media';
 import React from 'react';
 import {sampleMedia} from '@/sampleData'
 import {ANNOUNCEMENT_MAX_MESSAGE_LENGTH} from '@/app/constants'
