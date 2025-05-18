@@ -57,6 +57,7 @@ export default function DeanAnnouncementForm(){
         PostAction(form); // console.log it
         router.push("/demo/announcements");
     };
+
     return (
         <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto bg-white shadow-md p-6 rounded-xl space-y-6">
             <h2 className="text-2xl font-bold text-indigo-700">Create New Dean Announcement</h2>
@@ -79,7 +80,17 @@ export default function DeanAnnouncementForm(){
                 rows={4}
                 className="w-full p-2 border rounded"
             />
-
+            {form.body.length > ANNOUNCEMENT_MAX_MESSAGE_LENGTH && (
+                <div className="text-sm text-right text-red-600 mt-1">
+                {form.body.length}/{ANNOUNCEMENT_MAX_MESSAGE_LENGTH}
+                </div>    
+            )}
+            
+            {form.body.length <= ANNOUNCEMENT_MAX_MESSAGE_LENGTH && (
+                <div className="text-sm text-right text-gray-600 mt-1">
+                {form.body.length}/{ANNOUNCEMENT_MAX_MESSAGE_LENGTH}
+                </div>    
+            )}
             <input
                 name="mediaSrc"
                 value={form.mediaSrc}
