@@ -8,6 +8,34 @@
       "when": 1744964555081,
       "tag": "0000_initial_database_setup",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1747156549954,
+      "tag": "0001_rename_images_to_medias_add_type_field",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1747156652497,
+      "tag": "0002_announcments_change_user_id_to_organization_id",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1747156730757,
+      "tag": "0003_user_switch_username_to_email",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1747157178184,
+      "tag": "0004_change_images_table_name_to_medias",
+      "breakpoints": true
     }
   ]
 }
