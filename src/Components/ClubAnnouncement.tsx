@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-interface AnnouncementCardProps {
+export interface  AnnouncementCardProps {
   title: string;
   body: string;
   clubName: string;
