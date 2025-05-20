@@ -1,7 +1,9 @@
 'use client';
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
+import type {AnnouncementCardProps} from "@/Components/ClubAnnouncement"
+import ClubAnnouncement from "@/Components/ClubAnnouncement"
 import {createClubAnnouncement} from "@/app/admin/dashboard/student-club-announcement/actions"
 
 function SubmitButton() {
@@ -15,43 +17,77 @@ function SubmitButton() {
 }
 
 export default function ClubAnnouncementForm() {
+    const [tab, setTab] = useState<'form' | 'preview'>('form');
 
-    
+    const [name, setName] = useState('');
+    const [message, setMessage] = useState('');
+    const [mediaFile, setMediaFile] = useState<File | null>(null);
+    const [iconFile, setIconFile] = useState<File | null>(null);
+
+    const handleTabChange = (tabName: 'form' | 'preview') => {
+        setTab(tabName);
+    };
+
+    const previewProps: AnnouncementCardProps = {
+    title: name,
+    body: message,
+    clubName: "Test Club Name",
+    mediaSrc: mediaFile ? URL.createObjectURL(mediaFile) : undefined,
+    logoSrc: iconFile ? URL.createObjectURL(iconFile) : undefined,
+    mediaType: mediaFile ? "image" : undefined,
+    };
 
     return (
-    <form action={createClubAnnouncement} className="flex flex-col gap-4 max-w-xl mx-auto p-6 bg-white rounded-xl">
-        <h1 className="text-2xl font-bold mx-auto text-gray-900 mb-4">Create Club Announcement</h1>
-        <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
-                Title:
-            </label>
-            <input name="name" id="name" type="text" required 
-            className="shadow border rounded w-full p-2 text-gray-700" placeholder="Announcement Title"/>
-        </div>
-        <div className="mb-4">
-            <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">
-                Message:
-            </label>
-            <textarea name="message" id="message" rows={6} required 
-            className="shadow border rounded w-full p-2 text-gray-700" placeholder="Announcement Message"/>
-        </div>
-        <div className="mb-4">
-            <label htmlFor="media" className="block text-gray-700 text-sm font-bold mb-2">
-                Media (optional):
-            </label>
-            <input name="media" id="media" type="file" accept="image/*,video/*,gif/*" 
-            className="shadow border rounded w-full p-2 text-gray-700" placeholder="Announcement Media"/>
-        </div>
-        <div className="mb-4">
-            <label htmlFor="icon" className="block text-gray-700 text-sm font-bold mb-2">
-                Icon Image (optional):
-            </label>
-            <input name="icon" id="icon" type="file" accept="image/*"
-            className="shadow border rounded w-full p-2 text-gray-700" placeholder="Announcement Icon"/>
-        </div>
-
-      <SubmitButton/>
-
-    </form>
+    <div className="max-w-3xl mx-auto p-6">
+      <div className="flex justify-evenly max-w-3xl mb-4 mx-auto gap-2">
+        <button onClick={() => handleTabChange('form')} className={`p-2 rounded w-full ${tab === 'form' ? 'bg-black text-white' : 'bg-gray-600 text-black'}`}>
+          Form
+        </button>
+        <button onClick={() => handleTabChange('preview')} className={`p-2 rounded w-full ${tab === 'preview' ? 'bg-black text-white' : 'bg-gray-600 text-black'}`}>
+          Preview
+        </button>
+      </div>
+        {tab === 'form' ? (
+            <form action={createClubAnnouncement} className="flex flex-col shadow gap-4 max-w-3xl mx-auto p-6 bg-white rounded-xl">
+                <h1 className="text-2xl font-bold mx-auto text-gray-900 mb-4">Create Club Announcement</h1>
+                <div className="mb-4">
+                    <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
+                        Title:
+                    </label>
+                    <input name="name" id="name" type="text" required 
+                    className="shadow border rounded w-full p-2 text-gray-700" placeholder="Announcement Title"
+                    value={name} onChange={e => setName(e.target.value)}/>
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">
+                        Message:
+                    </label>
+                    <textarea name="message" id="message" rows={6} required 
+                    className="shadow border rounded w-full p-2 text-gray-700" placeholder="Announcement Message"
+                    value={message} onChange={e => setMessage(e.target.value)}/>
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="media" className="block text-gray-700 text-sm font-bold mb-2">
+                        Media (optional):
+                    </label>
+                    <input name="media" id="media" type="file" accept="image/*,video/*,gif/*" 
+                    className="shadow border rounded w-full p-2 text-gray-700" placeholder="Announcement Media"
+                    onChange={e => setMediaFile(e.target.files?.[0] || null)}/>
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="icon" className="block text-gray-700 text-sm font-bold mb-2">
+                        Icon Image (optional):
+                    </label>
+                    <input name="icon" id="icon" type="file" accept="image/*"
+                    className="shadow border rounded w-full p-2 text-gray-700" placeholder="Announcement Icon"
+                    onChange={e => setIconFile(e.target.files?.[0] || null)}/>
+                </div>
+                <SubmitButton/>
+            </form>
+            ):
+            (
+            <ClubAnnouncement {...previewProps}/>
+        )}
+    </div>
   );
 }
