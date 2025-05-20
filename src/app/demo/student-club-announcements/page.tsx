@@ -1,8 +1,9 @@
-"use client"
 
 import ClubAnnouncement from "@/Components/ClubAnnouncement";
+import { getClubAnnouncements } from "@/app/lib/getClubAnnouncements";
 
-export default function Announcement(){
+export default async function Announcement(){
+  const announcements = await getClubAnnouncements();
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 gap-6">
 
@@ -39,7 +40,15 @@ export default function Announcement(){
         mediaSrc="/media/buckspendragon-stan-twt.gif"
         mediaType="gif">
       </ClubAnnouncement>
-      
+
+      {announcements && announcements.length === 0 && (
+        <p className="text-gray-500 text-lg">No announcements found.</p>
+      )}
+
+      {announcements && announcements.map((announcement, index) => (
+        <ClubAnnouncement key={index} {...announcement} />
+      ))}
+
     </div>
     
   );
