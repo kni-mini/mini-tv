@@ -4,9 +4,11 @@ import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 import type {AnnouncementCardProps} from "@/Components/ClubAnnouncement"
 import ClubAnnouncement from "@/Components/ClubAnnouncement"
-import {createClubAnnouncement} from "@/app/admin/dashboard/student-club-announcement/actions"
+import {createClubAnnouncement} from "@/app/(main)/admin/student-club-announcement/actions"
 import { init } from "next/dist/compiled/webpack/webpack";
 import { ANNOUNCEMENT_MAX_MESSAGE_LENGTH } from "@/app/constants";
+
+
 
 function SubmitButton() {
   const { pending } = useFormStatus();

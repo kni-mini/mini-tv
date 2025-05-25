@@ -3,18 +3,10 @@
 import { revalidatePath } from "next/cache";
 import postgres from "postgres";
 import { z } from "zod";
-import ClubAnnouncement from "@/Components/ClubAnnouncement"
-import type {AnnouncementCardProps} from "@/Components/ClubAnnouncement"
-import { Medula_One } from "next/font/google";
-
-const sql = postgres({
-  host: process.env.POSTGRES_HOST || 'localhost',
-  port: Number(process.env.POSTGRES_PORT || 5432),
-  username: process.env.POSTGRES_USER || 'postgres',
-  password: process.env.POSTGRES_PASSWORD || '',
-  database: process.env.POSTGRES_DB || 'postgres',
-  ssl: false,
-});
+import { db } from '@/lib/db';
+import { users } from '@/lib/db/schema/users';
+import { announcements } from '@/lib/db/schema/announcements';
+import { medias } from '@/lib/db/schema/medias';
 
 const clubAnnouncementSchema = z.object({
     name: z.string().min(1),
@@ -71,6 +63,8 @@ export async function createClubAnnouncement(state: { success: boolean; message:
     try {
         if (media && media.size > 0) 
         {
+
+            
             const arrayBuffer = await media.arrayBuffer();
             const base64Media = Buffer.from(arrayBuffer).toString("base64");
             const mediaType = checkMediaType(media); 
@@ -79,21 +73,24 @@ export async function createClubAnnouncement(state: { success: boolean; message:
                 return state = { success: false, message: "This media type is unsupported. Only images, GIFs, and videos are allowed"};
             }
 
-            const [insertedMedia] = await sql`
-                INSERT INTO medias (file, name, type)
-                VALUES (${base64Media}, ${media.name}, ${mediaType})
-                RETURNING id
-            `;
+            const insertedMedia = await db.insert(medias)
+                .values({ file: base64Media, name: media.name, type: mediaType })
+                .returning({ id: medias.id });
 
-            mediaId = insertedMedia.id;
+            mediaId = insertedMedia[0]?.id;
         }
         const organizationId = 1; // todo
         const groupId = null;     // todo
 
-        await sql`
-            INSERT INTO announcements (name, message, media_id, organization_id, group_id, start_date, end_date)
-            VALUES (${name}, ${message}, ${mediaId}, ${organizationId}, ${groupId}, ${startDate}, ${endDate})
-            `;
+        await db.insert(announcements).values({
+                name,
+                message,
+                mediaId: mediaId,
+                organizationId,
+                groupId,
+                startDate,
+                endDate,
+                });
 
         revalidatePath("/admin/dashboard/student-club-announcement");
         return state = { success: true, message: "Successfully created a club announcement" };
