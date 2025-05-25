@@ -47,6 +47,8 @@ export async function createClubAnnouncement(state: { success: boolean; message:
     const message = formData.get("message") as string;
     const media = formData.get("media") as File | null;
     const icon = formData.get("icon") as File | null;
+    let startDate = formData.get("startDate") as Date | null;
+    const endDate = formData.get("endDate") as Date | null;
  
     const parse = clubAnnouncementSchema.safeParse({name, message});
 
@@ -55,7 +57,16 @@ export async function createClubAnnouncement(state: { success: boolean; message:
         return state = {success: false, message: "Invalid form submission"};
     }
 
-     let mediaId: number | null = null;
+    if (!startDate)
+    {
+        startDate = new Date();
+    }
+    if (!endDate && !startDate && endDate < startDate) 
+    {
+        return state = {success: false, message: "The start date cannot be later than the end date"};
+    }
+
+    let mediaId: number | null = null;
 
     try {
         if (media && media.size > 0) 
@@ -67,7 +78,6 @@ export async function createClubAnnouncement(state: { success: boolean; message:
             {
                 return state = { success: false, message: "This media type is unsupported. Only images, GIFs, and videos are allowed"};
             }
-            // deleted at
 
             const [insertedMedia] = await sql`
                 INSERT INTO medias (file, name, type)
@@ -81,8 +91,8 @@ export async function createClubAnnouncement(state: { success: boolean; message:
         const groupId = null;     // todo
 
         await sql`
-            INSERT INTO announcements (name, message, media_id, organization_id, group_id)
-            VALUES (${name}, ${message}, ${mediaId}, ${organizationId}, ${groupId})
+            INSERT INTO announcements (name, message, media_id, organization_id, group_id, start_date, end_date)
+            VALUES (${name}, ${message}, ${mediaId}, ${organizationId}, ${groupId}, ${startDate}, ${endDate})
             `;
 
         revalidatePath("/admin/dashboard/student-club-announcement");
@@ -90,7 +100,7 @@ export async function createClubAnnouncement(state: { success: boolean; message:
     }
     catch (e: any) 
     {
-        console.error("DB Error:", e);
+        console.error("Database Error:", e);
        return state = { success: false, message: "Failed to create a student club announcement"};
     }
   }

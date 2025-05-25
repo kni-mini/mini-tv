@@ -27,6 +27,8 @@ export default function ClubAnnouncementForm() {
     const [message, setMessage] = useState('');
     const [mediaFile, setMediaFile] = useState<File | null>(null);
     const [iconFile, setIconFile] = useState<File | null>(null);
+    const [startDate, setStartDate] = useState<Date | null>(null);
+    const [endDate, setEndDate] = useState<Date | null>(null);
 
     const handleTabChange = (tabName: 'form' | 'preview') => {
         setTab(tabName);
@@ -55,9 +57,11 @@ export default function ClubAnnouncementForm() {
             <form action={formAction} className="flex flex-col shadow-xl gap-4 max-w-3xl mx-auto p-6 bg-white rounded-xl">
                 <h1 className="text-2xl font-bold mx-auto text-indigo-700 mb-4">Create Club Announcement</h1>
                 {state.message && (
-                  <p className={`text-sm font-medium text-center ${state.success ? "text-green-600" : "text-red-600"}`}>
-                    {state.message}
-                  </p>)}
+                  <div className="mb-4 p-2 rounded ${state.success ? 'bg-green-600' : 'bg-red-600'}">
+                    <p className={"text-sm text-white"}>
+                      {state.message}
+                    </p>
+                  </div>)}
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
                         Title:
@@ -97,6 +101,23 @@ export default function ClubAnnouncementForm() {
                     className="shadow border rounded w-full p-2 text-gray-700" placeholder="Announcement Icon"
                     onChange={e => setIconFile(e.target.files?.[0] || null)}/>
                 </div>
+                <div className="mb-4">
+                    <label htmlFor="startDate" className="block text-gray-700 text-sm font-bold mb-2">
+                        Start Date (optional):
+                    </label>
+                    <input name="startDate" id="startDate" type="date" 
+                    className="shadow border rounded w-full p-2 text-gray-700" placeholder="Announcement Start Date"
+                    onChange={e => setStartDate(e.target.valueAsDate || null)}/>
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="endDate" className="block text-gray-700 text-sm font-bold mb-2">
+                        End Date (optional):
+                    </label>
+                    <input name="endDate" id="endDate" type="date"
+                    className="shadow border rounded w-full p-2 text-gray-700" placeholder="Announcement End Date"
+                    onChange={e => setEndDate(e.target.valueAsDate || null)}/>
+                </div>
+
                 <SubmitButton/>
             </form>
         </div>
