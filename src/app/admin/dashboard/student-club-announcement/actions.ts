@@ -61,9 +61,9 @@ export async function createClubAnnouncement(state: { success: boolean; message:
     {
         startDate = new Date();
     }
-    if (!endDate && !startDate && endDate < startDate) 
+    if (startDate && endDate && endDate < startDate) 
     {
-        return state = {success: false, message: "The start date cannot be later than the end date"};
+        return { success: false, message: "The start date cannot be later than the end date" };
     }
 
     let mediaId: number | null = null;
