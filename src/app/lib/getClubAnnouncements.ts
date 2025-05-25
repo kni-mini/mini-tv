@@ -1,51 +1,40 @@
 "use server";
 
-import postgres from "postgres";
-
-const sql = postgres({
-  host: process.env.POSTGRES_HOST || 'localhost',
-  port: Number(process.env.POSTGRES_PORT || 5432),
-  username: process.env.POSTGRES_USER || 'postgres',
-  password: process.env.POSTGRES_PASSWORD || '',
-  database: process.env.POSTGRES_DB || 'postgres',
-  ssl: false,
-});
+import { db } from '@/lib/db';
+import { users } from '@/lib/db/schema/users';
+import { announcements } from '@/lib/db/schema/announcements';
+import { medias } from '@/lib/db/schema/medias';
+import { eq, desc } from "drizzle-orm";
 
 export async function getClubAnnouncements() {
-  let retries = 5;
-  while (retries) {
-    try {
-      const result = await sql`
-        SELECT 
-          a.id,
-          a.name,
-          a.message,
-          a.start_date,
-          a.end_date,
-          a.deleted_at,
-          m.file AS media_file,
-          m.type AS media_type
-        FROM announcements a
-        LEFT JOIN medias m ON a.media_id = m.id
-        WHERE a.deleted_at IS NULL
-          AND (a.start_date IS NULL OR a.start_date <= NOW())
-          AND (a.end_date IS NULL OR a.end_date >= NOW())
-        ORDER BY a.start_date DESC;
-      `;
-      return result.map(row => ({
-        title: row.name,
-        body: row.message,
-        clubName: row.name,
-        mediaSrc: row.media_file ? `/public/media/${row.media_file}` : undefined,
-        mediaType: row.media_type ?? undefined,
-      }));
-    } 
-    catch (err) 
-    {
-      console.error("Postgres query failed. Retrying...", err);
-      retries--;
-      if (retries === 0) throw err;
-      await new Promise(res => setTimeout(res, 1000));
-    }
+  try {
+    const now = new Date();
+
+    const result = await db
+      .select({
+        id: announcements.id,
+        name: announcements.name,
+        message: announcements.message,
+        startDate: announcements.startDate,
+        endDate: announcements.endDate,
+        mediaFile: medias.file,
+        mediaType: medias.type,
+      })
+      .from(announcements)
+      .leftJoin(medias, eq(announcements.mediaId, medias.id))
+      .orderBy(desc(announcements.startDate));
+
+    return result.map(row => ({
+      title: row.name,
+      body: row.message,
+      clubName: row.name,
+      mediaSrc: row.mediaFile ? `/public/media/${row.mediaFile}` : undefined,
+      mediaType: row.mediaType ?? undefined,
+    }));
+  } 
+  catch (e) 
+  {
+    console.error("Drizzle query failed:", e);
+    throw e;
   }
 }

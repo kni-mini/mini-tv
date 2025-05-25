@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import postgres from "postgres";
 import { z } from "zod";
 import { db } from '@/lib/db';
 import { users } from '@/lib/db/schema/users';
