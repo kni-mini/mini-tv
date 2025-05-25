@@ -34,7 +34,7 @@ export default async function Announcement(){
 
       <ClubAnnouncement
         title="MiNI Hackathon!!!"
-        body="KNI IT is organizing a hackathon! Join with your friends to get fun experience with snack supplies!
+        body="KNI IT is organizing a hackathon! Join with your friends to get fun experience with snack supplies! 
         More details coming soon. Bring your creativity and team spirit!"
         clubName="KNI IT MiNI"
         mediaSrc="/media/buckspendragon-stan-twt.gif"

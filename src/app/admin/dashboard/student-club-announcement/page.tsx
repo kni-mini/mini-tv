@@ -5,12 +5,14 @@ import { useFormStatus } from "react-dom";
 import type {AnnouncementCardProps} from "@/Components/ClubAnnouncement"
 import ClubAnnouncement from "@/Components/ClubAnnouncement"
 import {createClubAnnouncement} from "@/app/admin/dashboard/student-club-announcement/actions"
+import { init } from "next/dist/compiled/webpack/webpack";
+import { ANNOUNCEMENT_MAX_MESSAGE_LENGTH } from "@/app/constants";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
-
+ 
   return (
-    <button type="submit" aria-disabled={pending} className="shadow border rounded-xl mx-auto w-full bg-black text-white">
+    <button type="submit" aria-disabled={pending} className="p-2 shadow border rounded-xl mx-auto w-full bg-indigo-700 text-white">
       Create
     </button>
   );
@@ -18,6 +20,8 @@ function SubmitButton() {
 
 export default function ClubAnnouncementForm() {
     const [tab, setTab] = useState<'form' | 'preview'>('form');
+    const initialState = {success: false, message: ""};
+    const [state, formAction] = useActionState(createClubAnnouncement, initialState);
 
     const [name, setName] = useState('');
     const [message, setMessage] = useState('');
@@ -40,16 +44,20 @@ export default function ClubAnnouncementForm() {
     return (
     <div className="max-w-3xl mx-auto p-6">
       <div className="flex justify-evenly max-w-3xl mb-4 mx-auto gap-2">
-        <button onClick={() => handleTabChange('form')} className={`p-2 rounded w-full ${tab === 'form' ? 'bg-black text-white' : 'bg-gray-600 text-black'}`}>
+        <button onClick={() => handleTabChange('form')} className={`p-2 rounded w-full ${tab === 'form' ? 'bg-indigo-700 text-white' : 'bg-gray-600 text-white'}`}>
           Form
         </button>
-        <button onClick={() => handleTabChange('preview')} className={`p-2 rounded w-full ${tab === 'preview' ? 'bg-black text-white' : 'bg-gray-600 text-black'}`}>
+        <button onClick={() => handleTabChange('preview')} className={`p-2 rounded w-full ${tab === 'preview' ? 'bg-indigo-700 text-white' : 'bg-gray-600 text-white'}`}>
           Preview
         </button>
       </div>
-        {tab === 'form' ? (
-            <form action={createClubAnnouncement} className="flex flex-col shadow gap-4 max-w-3xl mx-auto p-6 bg-white rounded-xl">
-                <h1 className="text-2xl font-bold mx-auto text-gray-900 mb-4">Create Club Announcement</h1>
+        <div className={tab === 'form' ? '' : 'hidden'}>
+            <form action={formAction} className="flex flex-col shadow-xl gap-4 max-w-3xl mx-auto p-6 bg-white rounded-xl">
+                <h1 className="text-2xl font-bold mx-auto text-indigo-700 mb-4">Create Club Announcement</h1>
+                {state.message && (
+                  <p className={`text-sm font-medium text-center ${state.success ? "text-green-600" : "text-red-600"}`}>
+                    {state.message}
+                  </p>)}
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
                         Title:
@@ -66,6 +74,13 @@ export default function ClubAnnouncementForm() {
                     className="shadow border rounded w-full p-2 text-gray-700" placeholder="Announcement Message"
                     value={message} onChange={e => setMessage(e.target.value)}/>
                 </div>
+                {message.length > ANNOUNCEMENT_MAX_MESSAGE_LENGTH && (
+                  <div className="mb-4 p-2 rounded bg-red-400">
+                    <p className={"text-sm text-white"}>
+                      NOTE: The message is longer than {ANNOUNCEMENT_MAX_MESSAGE_LENGTH} characters, it will be truncated.
+                    </p>
+                  </div>)
+                }
                 <div className="mb-4">
                     <label htmlFor="media" className="block text-gray-700 text-sm font-bold mb-2">
                         Media (optional):
@@ -84,10 +99,10 @@ export default function ClubAnnouncementForm() {
                 </div>
                 <SubmitButton/>
             </form>
-            ):
-            (
+        </div>
+        <div className={tab === 'preview' ? '' : 'hidden'}>
             <ClubAnnouncement {...previewProps}/>
-        )}
+        </div>
     </div>
   );
 }

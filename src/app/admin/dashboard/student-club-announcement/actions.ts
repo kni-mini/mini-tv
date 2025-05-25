@@ -5,6 +5,7 @@ import postgres from "postgres";
 import { z } from "zod";
 import ClubAnnouncement from "@/Components/ClubAnnouncement"
 import type {AnnouncementCardProps} from "@/Components/ClubAnnouncement"
+import { Medula_One } from "next/font/google";
 
 const sql = postgres({
   host: process.env.POSTGRES_HOST || 'localhost',
@@ -20,22 +21,38 @@ const clubAnnouncementSchema = z.object({
     message: z.string().min(1),
 });
 
-export async function createClubAnnouncement(formData: FormData) {
+function checkMediaType(media: File): "image" | "gif" | "video" | "unsupported"
+{
+    const mediaType = media.type;
+    if (mediaType.startsWith("image/"))
+    {
+        if (mediaType == "image/gif")
+        {
+            return "gif";
+        }
+        return "image";
+    }
+    else if (mediaType.startsWith("video/"))
+    {
+        return "video";
+    }
+    
+    return "unsupported";
+}
+
+
+export async function createClubAnnouncement(state: { success: boolean; message: string; }, formData: FormData) {
  
     const name = formData.get("name") as string;
     const message = formData.get("message") as string;
     const media = formData.get("media") as File | null;
     const icon = formData.get("icon") as File | null;
  
-
     const parse = clubAnnouncementSchema.safeParse({name, message});
-
-    let media_url = null;
-    let icon_url = null;
 
     if (!parse.success) 
     {
-        throw new Error("Invalid form submission");
+        return state = {success: false, message: "Invalid form submission"};
     }
 
      let mediaId: number | null = null;
@@ -45,8 +62,12 @@ export async function createClubAnnouncement(formData: FormData) {
         {
             const arrayBuffer = await media.arrayBuffer();
             const base64Media = Buffer.from(arrayBuffer).toString("base64");
-            const mediaType = "image"; // todo
-            // todo media name, created at, deleted at
+            const mediaType = checkMediaType(media); 
+            if (mediaType == "unsupported")
+            {
+                return state = { success: false, message: "This media type is unsupported. Only images, GIFs, and videos are allowed"};
+            }
+            // deleted at
 
             const [insertedMedia] = await sql`
                 INSERT INTO medias (file, name, type)
@@ -65,11 +86,11 @@ export async function createClubAnnouncement(formData: FormData) {
             `;
 
         revalidatePath("/admin/dashboard/student-club-announcement");
-        //return { message: `Added todo ${data.todo}` };
+        return state = { success: true, message: "Successfully created a club announcement" };
     }
     catch (e: any) 
     {
         console.error("DB Error:", e);
-        throw new Error("Failed to create a student club announcement");
+       return state = { success: false, message: "Failed to create a student club announcement"};
     }
   }

@@ -39,7 +39,9 @@ export async function getClubAnnouncements() {
         mediaSrc: row.media_file ? `/public/media/${row.media_file}` : undefined,
         mediaType: row.media_type ?? undefined,
       }));
-    } catch (err) {
+    } 
+    catch (err) 
+    {
       console.error("Postgres query failed. Retrying...", err);
       retries--;
       if (retries === 0) throw err;
