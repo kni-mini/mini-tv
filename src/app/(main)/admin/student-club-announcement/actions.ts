@@ -38,8 +38,11 @@ export async function createClubAnnouncement(state: { success: boolean; message:
     const message = formData.get("message") as string;
     const media = formData.get("media") as File | null;
     const icon = formData.get("icon") as File | null;
-    let startDate = formData.get("startDate") as Date | null;
-    const endDate = formData.get("endDate") as Date | null;
+    let startDateRaw = formData.get("startDate");
+    let endDateRaw = formData.get("endDate");
+
+    let startDate: Date | null = startDateRaw ? new Date(startDateRaw as string) : null;
+    let endDate: Date | null = endDateRaw ? new Date(endDateRaw as string) : null;
  
     const parse = clubAnnouncementSchema.safeParse({name, message});
 

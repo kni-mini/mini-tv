@@ -28,7 +28,7 @@ export async function getClubAnnouncements() {
       title: row.name,
       body: row.message,
       clubName: row.name,
-      mediaSrc: row.mediaFile ? `/public/media/${row.mediaFile}` : undefined,
+      mediaSrc: row.mediaFile && row.mediaType ? `data:${row.mediaType};base64,${row.mediaFile}` : undefined,
       mediaType: row.mediaType ?? undefined,
     }));
   } 
