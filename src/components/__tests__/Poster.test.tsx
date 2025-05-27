@@ -1,9 +1,7 @@
 /// <reference types="@testing-library/jest-dom" />
-
+import React from 'react';
 import { render, screen } from '@testing-library/react'
-import Poster from '../Poster'
-
-
+import Poster from '@/Components/Poster'
 
 
 describe('Poster component', () => {

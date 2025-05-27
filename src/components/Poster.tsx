@@ -1,6 +1,6 @@
 import React from 'react'
 import Image, { type ImageProps as NextImageProps } from 'next/image'
-import styles from './Poster.module.css'
+import styles from '@Components/Poster.module.css'
 
 export type ImagePosterProps = Omit<NextImageProps, 'unoptimized'> & {
   type:  'image'

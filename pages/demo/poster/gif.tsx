@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Poster from '../../../src/components/Poster'
+import Poster from '@/Components/Poster'
 
 function useWindowSize() {
   const [size, setSize] = useState({ width: 320, height: 180 })

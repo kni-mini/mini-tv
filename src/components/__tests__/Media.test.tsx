@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
-import Media, {MediaProps} from "@/components/Media";
+import Media, {MediaProps} from "@/Components/Media";
 import '@testing-library/jest-dom';
 
 

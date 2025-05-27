@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Announcement, { AnnouncementProps } from '@/components/Announcement';
+import Announcement, { AnnouncementProps } from '@/Components/Announcement';
 import Media, {MediaProps} from "@/Components/Media";
 import { sampleMedia } from '@/sampleData';
 import React from 'react';
