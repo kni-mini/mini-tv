@@ -44,8 +44,8 @@ export default async function Announcement() {
       )}
 
       {announcements &&
-        announcements.map((announcement, index) => (
-          <ClubAnnouncement key={index} {...announcement} />
+        announcements.map((announcement) => (
+          <ClubAnnouncement key={announcement.id} {...announcement} />
         ))}
     </div>
   );
