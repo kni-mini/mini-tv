@@ -5,8 +5,8 @@ const GifPage: React.FC = () => {
     <div
       style={{
         position: 'relative',
-        width: '100vw',
-        height: '100vh',
+        width:  '100vw',
+        height: '91vh',
         background: '#000',
       }}
     >
