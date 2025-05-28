@@ -1,13 +1,12 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Media, {MediaProps} from "@/Components/Media";
+import Media, { MediaProps } from '@/components/Media';
 import '@testing-library/jest-dom';
 
-
-describe("Media", () => {
-  it("displays error message for unsupported media type", () => {
+describe('Media', () => {
+  it('displays error message for unsupported media type', () => {
     const now = new Date();
-    const unsupportedMediaType = "pdf";
+    const unsupportedMediaType = 'pdf';
     render(
       <Media
         id={1}
@@ -18,7 +17,9 @@ describe("Media", () => {
         alt="Unsupported media"
       />
     );
-    expect(screen.getByText(new RegExp(`Unsupported media type: ${unsupportedMediaType}$`, 'i'))).toBeInTheDocument();
+    expect(
+      screen.getByText(new RegExp(`Unsupported media type: ${unsupportedMediaType}$`, 'i'))
+    ).toBeInTheDocument();
   });
 
   it('displays message if media is deleted already', () => {
@@ -30,10 +31,9 @@ describe("Media", () => {
       deleteAt: new Date(),
       alt: 'Deleted image',
     };
-  
+
     render(<Media {...deletedMedia} />);
-  
+
     expect(screen.getByText(/This media has been deleted/i)).toBeInTheDocument();
   });
-
 });

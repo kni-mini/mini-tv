@@ -2,8 +2,8 @@
 
 import { useActionState, useState } from 'react';
 import { useFormStatus } from 'react-dom';
-import type { AnnouncementCardProps } from '@/Components/ClubAnnouncement';
-import ClubAnnouncement from '@/Components/ClubAnnouncement';
+import type { AnnouncementCardProps } from '@/components/ClubAnnouncement';
+import ClubAnnouncement from '@/components/ClubAnnouncement';
 import { createClubAnnouncement } from '@/app/(main)/admin/student-club-announcement/actions';
 import { ANNOUNCEMENT_MAX_MESSAGE_LENGTH } from '@/app/constants';
 

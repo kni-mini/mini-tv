@@ -1,40 +1,35 @@
-import React from 'react'
-import Image, { type ImageProps as NextImageProps } from 'next/image'
-import styles from '@Components/Poster.module.css'
+import React from 'react';
+import Image, { type ImageProps as NextImageProps } from 'next/image';
+import styles from './Poster.module.css';
 
 export type ImagePosterProps = Omit<NextImageProps, 'unoptimized'> & {
-  type:  'image'
-  src:   string
-  fill?: boolean
-  style?: React.CSSProperties
-}
+  type: 'image';
+  src: string;
+  fill?: boolean;
+  style?: React.CSSProperties;
+};
 
 export type GifPosterProps = {
-  type: 'gif'
-  src:  string
-  alt?: string
-  loop?: boolean
-}
+  type: 'gif';
+  src: string;
+  alt?: string;
+  loop?: boolean;
+};
 
 export type VideoPosterProps = {
-  type: 'video'
-  src:  string
-  autoplay?: boolean
-  loop?:     boolean
-  muted?:    boolean
-}
+  type: 'video';
+  src: string;
+  autoplay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+};
 
-export type PosterProps = ImagePosterProps | GifPosterProps | VideoPosterProps
+export type PosterProps = ImagePosterProps | GifPosterProps | VideoPosterProps;
 
 export const Poster: React.FC<PosterProps> = (props) => {
   switch (props.type) {
     case 'image': {
-      const {
-        src,
-        alt   = 'Poster',
-        fill  = false,
-        style = { objectFit: 'cover' },
-      } = props
+      const { src, alt = 'Poster', fill = false, style = { objectFit: 'cover' } } = props;
 
       return (
         <div className={styles.container}>
@@ -46,14 +41,14 @@ export const Poster: React.FC<PosterProps> = (props) => {
             loading="lazy"
           />
         </div>
-      )
+      );
     }
 
     case 'gif': {
-      const { src, alt = 'Poster', loop = false } = props
+      const { src, alt = 'Poster', loop = false } = props;
       return (
         <div className={styles.container}>
-          <img
+          <Image
             className={styles.media}
             src={src}
             alt={alt}
@@ -61,11 +56,11 @@ export const Poster: React.FC<PosterProps> = (props) => {
             {...(loop ? { loop: true } : {})}
           />
         </div>
-      )
+      );
     }
 
     case 'video': {
-      const { src, autoplay = false, loop = false, muted = false } = props
+      const { src, autoplay = false, loop = false, muted = false } = props;
       return (
         <div className={styles.container}>
           <video
@@ -80,12 +75,12 @@ export const Poster: React.FC<PosterProps> = (props) => {
             muted={muted}
           />
         </div>
-      )
+      );
     }
 
     default:
-      return null
+      return null;
   }
-}
+};
 
-export default Poster
+export default Poster;

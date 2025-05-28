@@ -1,5 +1,5 @@
 import React from 'react';
-import ClubAnnouncementForm from '@/Components/ClubAnnouncementForm';
+import ClubAnnouncementForm from '@/components/ClubAnnouncementForm';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ANNOUNCEMENT_MAX_MESSAGE_LENGTH } from '@/app/constants';
 

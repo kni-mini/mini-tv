@@ -1,14 +1,12 @@
-import React from 'react';
-import Announcement from '@/Components/Announcement';
-import type { AnnouncementProps } from '@/Components/Announcement';
-import Media, { MediaProps } from '@/Components//Media';
+import type { AnnouncementProps } from '@/components/Announcement';
+import { MediaProps } from '@/components/Media';
 
 const now = new Date();
 const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
 const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
 const nextWeek = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
 
-export const sampleMedia: MediaProps[] =   [
+export const sampleMedia: MediaProps[] = [
   {
     id: 1,
     file: '/demo-media/integral-fest.png',
@@ -25,7 +23,8 @@ export const sampleMedia: MediaProps[] =   [
     mediaType: 'video',
     alt: 'Language classes video',
     autoPlay: true,
-    caption: 'Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025',
+    caption:
+      'Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025',
   },
   {
     id: 3,
@@ -37,12 +36,12 @@ export const sampleMedia: MediaProps[] =   [
   },
 ];
 
-
 export const sampleAnnouncements: AnnouncementProps[] = [
   {
     id: 1,
     name: 'Dean Office Hours',
-    message: '08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest.',
+    message:
+      '08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest.',
     groupId: 1,
     userId: 101,
     startDate: yesterday,
@@ -53,24 +52,26 @@ export const sampleAnnouncements: AnnouncementProps[] = [
   {
     id: 2,
     name: 'Language classes',
-    message: 'Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025',
+    message:
+      'Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025',
     groupId: 2,
     userId: 102,
     startDate: now,
     endDate: nextWeek,
     createdAt: now,
-    mediaId: 2, 
+    mediaId: 2,
   },
   {
     id: 3,
     name: 'Library Course',
-    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
+    message:
+      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
     startDate: yesterday,
     endDate: tomorrow,
     createdAt: now,
-    mediaId: undefined, 
+    mediaId: undefined,
   },
   {
     id: 4,
@@ -81,7 +82,7 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     startDate: tomorrow,
     endDate: nextWeek,
     createdAt: now,
-    mediaId: undefined, 
+    mediaId: undefined,
   },
   {
     id: 5,
@@ -92,105 +93,114 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     startDate: new Date('2025-01-01'),
     endDate: new Date('2025-02-01'),
     createdAt: now,
-    mediaId: undefined, 
+    mediaId: undefined,
   },
   {
     id: 6,
     name: 'Library Course',
-    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ',
+    message:
+      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ',
     groupId: 3,
     userId: 103,
     startDate: yesterday,
     endDate: nextWeek,
     createdAt: now,
-    mediaId: 3, 
+    mediaId: 3,
   },
   {
     id: 7,
     name: 'Library Course again...',
-    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
+    message:
+      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
     startDate: new Date('2025-04-01'),
     endDate: new Date('2025-05-05'),
     createdAt: now,
-    mediaId: undefined, 
+    mediaId: undefined,
   },
   {
     id: 8,
     name: 'Library Course again...',
-    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
+    message:
+      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
     startDate: new Date('2025-04-01'),
     endDate: new Date('2025-05-05'),
     createdAt: now,
-    mediaId: undefined, 
+    mediaId: undefined,
   },
   {
     id: 9,
     name: 'Library Course again...',
-    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
+    message:
+      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
     startDate: new Date('2025-04-01'),
     endDate: new Date('2025-05-05'),
     createdAt: now,
-    mediaId: undefined, 
+    mediaId: undefined,
   },
   {
     id: 10,
     name: 'Library Course again...',
-    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
+    message:
+      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
     startDate: new Date('2025-04-01'),
     endDate: new Date('2025-05-09'),
     createdAt: now,
-    mediaId: undefined, 
+    mediaId: undefined,
   },
   {
     id: 11,
     name: 'Library Course again...',
-    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
+    message:
+      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
     startDate: new Date('2025-04-01'),
     endDate: new Date('2025-05-09'),
     createdAt: now,
-    mediaId: undefined, 
+    mediaId: undefined,
   },
   {
     id: 12,
     name: 'Library Course again...',
-    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
+    message:
+      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
     startDate: new Date('2025-04-01'),
     endDate: new Date('2025-05-09'),
     createdAt: now,
-    mediaId: undefined, 
+    mediaId: undefined,
   },
   {
     id: 13,
     name: 'Library Course again...',
-    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
+    message:
+      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
     startDate: new Date('2025-04-01'),
     endDate: new Date('2025-05-05'),
     createdAt: now,
-    mediaId: undefined, 
+    mediaId: undefined,
   },
   {
     id: 14,
     name: 'Library Course again...',
-    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
+    message:
+      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
     groupId: 3,
     userId: 103,
     startDate: new Date('2025-04-01'),
     endDate: new Date('2025-05-09'),
     createdAt: now,
-    mediaId: undefined, 
+    mediaId: undefined,
   },
 ];
