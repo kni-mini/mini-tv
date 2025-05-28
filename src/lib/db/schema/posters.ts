@@ -1,14 +1,17 @@
 import { pgTable, serial, text, timestamp, integer, index } from 'drizzle-orm/pg-core';
 import { users } from './users';
 import { groups } from './groups';
+import { medias } from './medias';
 import { uniqueWhenNotDeleted } from './utils';
 
-export const announcements = pgTable(
-  'announcements',
+export const posters = pgTable(
+  'posters',
   {
     id: serial('id').primaryKey(),
     name: text('name').notNull(),
-    message: text('message').notNull(), // markdown
+    mediaId: integer('media_id')
+      .notNull()
+      .references(() => medias.id),
     groupId: integer('group_id').references(() => groups.id),
     userId: integer('user_id')
       .notNull()
