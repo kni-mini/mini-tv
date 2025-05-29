@@ -1,42 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import Poster from '../../../src/components/Poster'
 
-function useWindowSize() {
-  const [size, setSize] = useState({ width: 320, height: 180 })
-
-  useEffect(() => {
-    const onResize = () => {
-      setSize({ width: window.innerWidth, height: window.innerHeight })
-    }
-    onResize()
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-  }, [])
-
-  return size
+export interface VideoProps {
+  /** Path to the video file */
+  path: string
+  /** Auto‐play the video (default: false) */
+  autoplay?: boolean
+  /** Loop the video (default: false) */
+  loop?: boolean
+  /** Mute the video (default: false) */
+  muted?: boolean
+  /** Pass additional CSS classes */
+  className?: string
+  /** Inline styles */
+  style?: React.CSSProperties
 }
 
-const VideoPage: React.FC = () => {
-  const { width, height } = useWindowSize()
+const Video: React.FC<VideoProps> = ({
+  path,
+  autoplay = false,
+  loop = false,
+  muted = false,
+  className,
+  style,
+}) => (
+  <Poster
+    type="video"
+    src={path}
+    autoplay={autoplay}
+    loop={loop}
+    muted={muted}
+    className={className}
+    style={style}
+  />
+)
 
-  return (
-    <div
-      style={{
-        position: 'relative',
-        width:  '100vw',
-        height: '91vh',
-        background: '#000',
-      }}
-    >
-      <Poster
-        type="video"
-        src="/demo-media/sample.mp4"
-        autoplay
-        loop
-        muted
-      />
-    </div>
-  )
-}
-
-export default VideoPage
+export default Video

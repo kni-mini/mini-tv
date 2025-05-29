@@ -31,9 +31,24 @@ const PosterHolder: React.FC<PosterHolderProps> = ({ src, alt, loop, className }
       </header>
       
       <main className="h-5/6 flex justify-center items-center p-4">
-        <div className="max-h-full max-w-full">
-          <Image />
-        </div>
+         <div
+      style={{
+        position: 'relative',
+        width: '100vw',
+        height: '91vh',
+        background: '#000',
+      }}
+    >
+      <Video
+        path="/demo-media/sample.mp4"
+        autoplay
+        loop
+        muted
+        className={className}
+        
+        style={{ objectFit: 'cover' }}
+      />
+    </div>
       </main>
       
       <footer
