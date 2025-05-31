@@ -53,7 +53,18 @@ const PosterHolder: NextPage<Props> = ({ files }) => {
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-black">
       {/* ── HEADER (always 5% of viewport) ── */}
-      <header className="h-[5%] bg-black text-white text-center text-[3vh] leading-[4vh]">
+      <header style={{
+          height: '4%',
+          position: 'fixed',
+          top: 0,
+          width: '100%',
+          padding: '0.5rem',
+          background: 'black',
+          color: 'white',
+          textAlign: 'center',
+          fontSize: '3.0vh',
+          
+        }}>
         {timeString}
       </header>
 
@@ -77,7 +88,19 @@ const PosterHolder: NextPage<Props> = ({ files }) => {
 </main>
 
       {/* ── FOOTER (always 5% of viewport) ── */}
-      <footer >
+      <footer 
+      style={{
+          height: '4%',
+          position: 'fixed',
+          bottom: 0,
+          width: '100%',
+          padding: '0.5rem',
+          background: 'black',
+          color: 'white',
+          textAlign: 'center',
+          fontSize: '3.0vh',
+          
+        }}>
         {dateString}
       </footer>
     </div>
