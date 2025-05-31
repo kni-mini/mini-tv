@@ -65,18 +65,19 @@ const PosterHolder: NextPage<Props> = ({ files }) => {
     alt={files[idx].split('/').pop() || ''}
     loop
     style={{
-      position: 'absolute',
-      top: 0,
+      position: 'fixed',
+      
+      top: '5%',
       left: 0,
       width: '100%',
-      height: '100%',
+      height: '90%',
       // objectFit: 'cover' is already wired in the Image above.
     }}
   />
 </main>
 
       {/* ── FOOTER (always 5% of viewport) ── */}
-      <footer className="h-[5%] bg-black text-white text-center text-[3vh] leading-[4vh]">
+      <footer >
         {dateString}
       </footer>
     </div>
