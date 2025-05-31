@@ -1,13 +1,13 @@
 // src/components/Poster/media.tsx
 import React from 'react'
-import Image from './image'
-import Gif   from './gif'
+import Image from 'next/image'   // or your own wrapper around next/image
+import Gif from './gif'
 import Video from './video'
 
 export interface MediaProps {
-  src:       string       // e.g. "/demo-media/foo.mp4"
+  src:       string       // ex: "/demo-media/foo.mp4" or "/demo-media/foo.png"
   alt?:      string
-  loop?:     boolean      // only used for gifs/videos
+  loop?:     boolean      // for gif/video
   className?: string
   style?:    React.CSSProperties
 }
@@ -48,11 +48,21 @@ const Media: React.FC<MediaProps> = ({
     case 'webp':
       return (
         <Image
-          path={src}
+          src={src}
           alt={alt}
-          fill
-          className={className}
-          style={style}
+          width={1600}             // required
+          height={900}             // required
+          fill                  // ← tell Next.js “yes, I want you to fill the parent”
+           style={{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '90%',         // override the rendered output to stretch
+    height: '90%',        // to fill the parent anyway
+    objectFit: 'cover',
+    ...style,
+  }}
+  className={className}
         />
       )
     default:
