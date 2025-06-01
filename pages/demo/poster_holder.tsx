@@ -122,7 +122,7 @@ const PosterHolder: NextPage<Props> = ({ files }) => {
       </header>
 
       {/* ── MAIN (90% viewport height, pushed down by 5% so it doesn’t hide under header) ── */}
-      <main className="relative h-[90%] pt-[5%]">
+      <main>
         {currentSlide.type === 'media' ? (
           // If this slide is a media file, fill the entire area with <Media>
           <Media
@@ -131,28 +131,19 @@ const PosterHolder: NextPage<Props> = ({ files }) => {
             loop={true}
             style={{
               position: 'absolute',
-              top: 0,
+              top: '5%',
               left: 0,
               width: '100%',
-              height: '100%',
+              height: '90%',
             }}
           />
         ) : (
           // If this slide is a single announcement, render exactly that one announcement
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              overflowY: 'auto',
-              backgroundColor: 'rgba(0, 0, 0, 0.8)',
-              color: '#fff',
-              padding: '1rem',
-            }}
-          >
-            <Announcement {...currentSlide.data} />
+            <div style={{ paddingTop: '40%', height: '90%' , position: 'relative' }}>
+            {/* Constrain the card to max‐width 32rem, center horizontally */}
+            <div className="w-full max-w-lg">
+              <Announcement {...currentSlide.data} />
+            </div>
           </div>
         )}
       </main>
