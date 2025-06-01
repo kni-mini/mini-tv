@@ -1,41 +1,35 @@
-import React, { useState, useEffect } from 'react'
+// src/components/Gif.tsx
+import React from 'react'
 import Poster from '../../../src/components/Poster'
 
-function useWindowSize() {
-  const [size, setSize] = useState({ width: 320, height: 180 })
-
-  useEffect(() => {
-    const onResize = () => {
-      setSize({ width: window.innerWidth, height: window.innerHeight })
-    }
-    onResize()
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-  }, [])
-
-  return size
+export interface GifProps {
+  /** Path to the GIF file (under /public) */
+  path: string
+  /** Alternate text */
+  alt?: string
+  /** Whether to loop (browsers loop GIFs by default anyway) */
+  loop?: boolean
+  /** Extra CSS classes on the container */
+  className?: string
+  /** Inline styles on the container or media element */
+  style?: React.CSSProperties
 }
 
-const GifPage: React.FC = () => {
-  const { width, height } = useWindowSize()
+const Gif: React.FC<GifProps> = ({
+  path,
+  alt = '',
+  loop = false,
+  className,
+  style,
+}) => (
+  <Poster
+    type="gif"
+    src={path}
+    alt={alt}
+    loop={loop}
+    className={className}
+    style={style}
+  />
+)
 
-  return (
-    <div
-      style={{
-        position: 'relative',
-        width:  '100vw',
-        height: '91vh',
-        background: '#000',
-      }}
-    >
-      <Poster
-        type="gif"
-        src="/demo-media/sample.gif"
-        alt="Sample animated GIF"
-        loop
-      />
-    </div>
-  )
-}
-
-export default GifPage
+export default Gif
