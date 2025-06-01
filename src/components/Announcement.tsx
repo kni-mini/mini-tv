@@ -1,55 +1,104 @@
-import Media, { MediaProps } from '@/components/Media';
+// @/components/Announcement.tsx
 import React from 'react';
-import {sampleMedia} from '@/sampleData'
-import {ANNOUNCEMENT_MAX_MESSAGE_LENGTH} from '@/app/constants'
 
-export type AnnouncementProps = {
+export interface AnnouncementProps {
+  type: 'announcement';
   id: number;
-  name: string;
-  message: string;
-  groupId?: number;
-  userId: number;
+  announcementName: string;
+  organizationName: string;
+  organizationLogo: string;      // URL to logo image
+  media?: string;                // URL to an image/video/gif (optional)
+  mediaType?: 'image' | 'video' | 'gif';
+  mediaAlt?: string;             // alt text for image/gif (optional)
+  text: string;                  // announcement body
   startDate: Date;
-  endDate?: Date;
   createdAt: Date;
-  deletedAt?: Date;
-  mediaId?: number;
 }
 
-export default function Announcement({
-  name,
-  message,
-  groupId,
-  userId,
+const Announcement: React.FC<AnnouncementProps> = ({
+  announcementName,
+  organizationName,
+  organizationLogo,
+  media,
+  mediaType,
+  mediaAlt,
+  text,
   startDate,
-  endDate,
   createdAt,
-  deletedAt,
-  mediaId,
-}: AnnouncementProps) {
-  const now = new Date();
-
-  if (now < startDate || (endDate && now > endDate) || (deletedAt && now > deletedAt)) {
-    return null;
-  }
-
-  const media = sampleMedia.find(m => m.id === mediaId);
-  const truncatedMessage = (message.length > ANNOUNCEMENT_MAX_MESSAGE_LENGTH) ? (message.slice(0, ANNOUNCEMENT_MAX_MESSAGE_LENGTH) + '...') : message;
-  const hasMedia = Boolean(media);
-
+}) => {
   return (
-    <div
-      className={`relative bg-white rounded-xl p-4 flex flex-row gap-4 ${
-      hasMedia ? 'max-h-[30cqh] min-h-[25cqh]' : 'max-h-[20cqh] min-h-[15cqh]'}`}>
-        <div className="flex-1 flex flex-col justify-center">
-          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">{name}</h2>
-          <p className="text-gray-800" style={{ fontSize: 'clamp(0.65rem, 2vw, 1.125rem)' }}>{truncatedMessage}</p>
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+      {/* ── HEADER: logo + title + organization ── */}
+      <div className="flex items-center px-4 py-3 border-b">
+        <img
+          src={organizationLogo}
+          alt={`${organizationName} logo`}
+          className="h-10 w-10 mr-3 rounded-full object-cover"
+        />
+        <div className="flex flex-col">
+          <span className="text-xl font-semibold text-gray-800">
+            {announcementName}
+          </span>
+          <span className="text-sm text-gray-500">{organizationName}</span>
         </div>
-      {media && (
-        <figure className="relative object-contain aspect-video max-h-full max-w-[50%] rounded-lg">
-        <Media {...media}/>
-        </figure>)}
+      </div>
+
+      {/* ── MEDIA (if any) ── */}
+      {media && mediaType === 'image' && (
+        <img
+          src={media}
+          alt={mediaAlt}
+          className="w-full h-48 object-cover"
+        />
+      )}
+
+      {media && mediaType === 'gif' && (
+        <img
+          src={media}
+          alt={mediaAlt}
+          className="w-full h-48 object-cover"
+        />
+      )}
+
+      {media && mediaType === 'video' && (
+        <video
+          src={media}
+          autoPlay
+          loop
+          muted
+          className="w-full h-48 object-cover"
+          aria-label={mediaAlt}
+        />
+      )}
+
+      {/* ── BODY: text ── */}
+      <div className="px-4 py-3 flex-1 flex flex-col justify-between">
+        <p className="text-gray-700 text-base mb-4 leading-relaxed">
+          {text}
+        </p>
+
+        {/* ── FOOTER: dates ── */}
+        <div className="flex justify-between text-sm text-gray-500">
+          <span>
+            <strong>Published:</strong>{' '}
+            {createdAt.toLocaleDateString(undefined, {
+              year: 'numeric',
+              month: 'short',
+              day: '2-digit',
+            })}
+          </span>
+          <span>
+            <strong>Effective:</strong>{' '}
+            {startDate.toLocaleDateString(undefined, {
+              year: 'numeric',
+              month: 'short',
+              day: '2-digit',
+            })}
+          </span>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
+export default Announcement;

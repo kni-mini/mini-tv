@@ -1,41 +1,22 @@
+// page: demo/poster/paginateAnnouncements.tsx
 import React from 'react';
 import Announcement from '@/components/Announcement';
 import type { AnnouncementProps } from '@/components/Announcement';
 
 export type WeightedAnnouncement = AnnouncementProps & { weight: number };
 
-export function paginateAnnouncements(announcements: AnnouncementProps[]): AnnouncementProps[][] {
-  const pages: AnnouncementProps[][] = [];
-  let currentPage: WeightedAnnouncement[] = [];
-  let currentWeight = 0;
+export function paginateAnnouncements(
+  announcements: AnnouncementProps[],
+  pageSize: number = 5
+): AnnouncementProps[][] {
   const now = new Date();
+  // Filter out future‐dated announcements
+  const active = announcements.filter((a) => a.startDate <= now);
 
-  for (const announcement of announcements) 
-  {
-    if ((announcement.startDate && announcement.startDate > now) ||
-      (announcement.endDate && announcement.endDate < now) ||
-      (announcement.deletedAt && announcement.deletedAt < now)) {
-      continue;
-    }
-
-    const hasMedia = announcement.mediaId !== undefined;
-    const weight = hasMedia ? 30 : 20;
-
-    if (currentWeight + weight > 100) 
-    {
-      pages.push(currentPage.map(a => ({ ...a })));
-      currentPage = [];
-      currentWeight = 0;
-    }
-
-    currentPage.push({ ...announcement, weight });
-    currentWeight += weight;
+  // Then chunk into pages of size `pageSize`
+  const pages: AnnouncementProps[][] = [];
+  for (let i = 0; i < active.length; i += pageSize) {
+    pages.push(active.slice(i, i + pageSize));
   }
-
-  if (currentPage.length > 0) 
-  {
-    pages.push(currentPage.map(a => ({ ...a })));
-  }
-
   return pages;
 }

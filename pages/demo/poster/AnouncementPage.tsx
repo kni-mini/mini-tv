@@ -1,3 +1,4 @@
+// page: demo/poster/paginateAnnouncements.tsx
 "use client"
 
 import React from 'react';
