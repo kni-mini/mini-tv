@@ -44,3 +44,5 @@ jspm_packages
 .env.production
 .env.test
 .env.test.local
+
+.swc

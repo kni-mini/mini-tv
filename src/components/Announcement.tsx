@@ -1,7 +1,7 @@
-import Media, { MediaProps } from '@/components/Media';
+import Media from '@/components/Media';
 import React from 'react';
-import {sampleMedia} from '@/sampleData'
-import {ANNOUNCEMENT_MAX_MESSAGE_LENGTH} from '@/app/constants'
+import { sampleMedia } from '@/sampleData';
+import { ANNOUNCEMENT_MAX_MESSAGE_LENGTH } from '@/app/constants';
 
 export type AnnouncementProps = {
   id: number;
@@ -14,7 +14,7 @@ export type AnnouncementProps = {
   createdAt: Date;
   deletedAt?: Date;
   mediaId?: number;
-}
+};
 
 export default function Announcement({
   name,
@@ -33,23 +33,32 @@ export default function Announcement({
     return null;
   }
 
-  const media = sampleMedia.find(m => m.id === mediaId);
-  const truncatedMessage = (message.length > ANNOUNCEMENT_MAX_MESSAGE_LENGTH) ? (message.slice(0, ANNOUNCEMENT_MAX_MESSAGE_LENGTH) + '...') : message;
+  const media = sampleMedia.find((m) => m.id === mediaId);
+  const truncatedMessage =
+    message.length > ANNOUNCEMENT_MAX_MESSAGE_LENGTH
+      ? message.slice(0, ANNOUNCEMENT_MAX_MESSAGE_LENGTH) + '...'
+      : message;
   const hasMedia = Boolean(media);
 
   return (
     <div
       className={`relative bg-white rounded-xl p-4 flex flex-row gap-4 ${
-      hasMedia ? 'max-h-[30cqh] min-h-[25cqh]' : 'max-h-[20cqh] min-h-[15cqh]'}`}>
-        <div className="flex-1 flex flex-col justify-center">
-          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">{name}</h2>
-          <p className="text-gray-800" style={{ fontSize: 'clamp(0.65rem, 2vw, 1.125rem)' }}>{truncatedMessage}</p>
-        </div>
+        hasMedia ? 'max-h-[30cqh] min-h-[25cqh]' : 'max-h-[20cqh] min-h-[15cqh]'
+      }`}
+    >
+      <div className="flex-1 flex flex-col justify-center">
+        <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">
+          {name}
+        </h2>
+        <p className="text-gray-800" style={{ fontSize: 'clamp(0.65rem, 2vw, 1.125rem)' }}>
+          {truncatedMessage}
+        </p>
+      </div>
       {media && (
         <figure className="relative object-contain aspect-video max-h-full max-w-[50%] rounded-lg">
-        <Media {...media}/>
-        </figure>)}
+          <Media {...media} />
+        </figure>
+      )}
     </div>
   );
 }
-

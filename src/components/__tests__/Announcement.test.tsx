@@ -1,11 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import Announcement, { AnnouncementProps } from '@/components/Announcement';
-import Media, {MediaProps} from "@/components/Media";
 import { sampleMedia } from '@/sampleData';
 import React from 'react';
 import '@testing-library/jest-dom';
-import {ANNOUNCEMENT_MAX_MESSAGE_LENGTH} from '@/app/constants'
-
+import { ANNOUNCEMENT_MAX_MESSAGE_LENGTH } from '@/app/constants';
 
 describe('Announcement', () => {
   const announcementTestProps: AnnouncementProps = {
@@ -15,10 +13,10 @@ describe('Announcement', () => {
     userId: 1,
     startDate: new Date(),
     createdAt: new Date(),
-  }; 
-  const imageTestProps = sampleMedia.find(m => m.mediaType === 'image')!;
-  const videoTestProps = sampleMedia.find(m => m.mediaType === 'video')!;
-  const gifTestProps = sampleMedia.find(m => m.mediaType === 'gif')!;
+  };
+  const imageTestProps = sampleMedia.find((m) => m.mediaType === 'image')!;
+  const videoTestProps = sampleMedia.find((m) => m.mediaType === 'video')!;
+  const gifTestProps = sampleMedia.find((m) => m.mediaType === 'gif')!;
 
   it('renders image media', () => {
     render(<Announcement {...announcementTestProps} mediaId={imageTestProps.id} />);
@@ -42,7 +40,7 @@ describe('Announcement', () => {
   });
 
   it('truncates message when over maxMessLength', () => {
-    const expectedTruncatedMessage = 'a'.repeat(ANNOUNCEMENT_MAX_MESSAGE_LENGTH) + "...";
+    const expectedTruncatedMessage = 'a'.repeat(ANNOUNCEMENT_MAX_MESSAGE_LENGTH) + '...';
     render(
       <Announcement
         {...announcementTestProps}
@@ -53,24 +51,12 @@ describe('Announcement', () => {
   });
 
   it('does not render announcement if startDate is later', () => {
-    render(
-      <Announcement
-        {...announcementTestProps}
-        startDate={new Date(Date.now() + 100000)}
-      />
-    );
+    render(<Announcement {...announcementTestProps} startDate={new Date(Date.now() + 100000)} />);
     expect(screen.queryByText('Test Announcement')).not.toBeInTheDocument();
   });
 
   it('does not render announcement if after deletedAt', () => {
-    render(
-      <Announcement
-        {...announcementTestProps}
-        deletedAt={new Date(Date.now() - 1000)}
-      />
-    );
+    render(<Announcement {...announcementTestProps} deletedAt={new Date(Date.now() - 1000)} />);
     expect(screen.queryByText('Test Announcement')).not.toBeInTheDocument();
   });
 });
-
-
