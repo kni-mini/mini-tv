@@ -1,6 +1,6 @@
 {
-  "id": "46f6514f-54c5-4bb4-b72b-b9e801a6c723",
-  "prevId": "654288ce-71ad-4143-88a6-86183ea4ab6d",
+  "id": "02cb6420-8a9a-4464-b6cf-8d6f944d2380",
+  "prevId": "46f6514f-54c5-4bb4-b72b-b9e801a6c723",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -32,8 +32,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "user_id": {
-          "name": "user_id",
+        "organization_id": {
+          "name": "organization_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -94,25 +94,17 @@
           "name": "announcements_group_id_groups_id_fk",
           "tableFrom": "announcements",
           "tableTo": "groups",
-          "columnsFrom": [
-            "group_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["group_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "announcements_user_id_users_id_fk": {
-          "name": "announcements_user_id_users_id_fk",
+        "announcements_organization_id_organizations_id_fk": {
+          "name": "announcements_organization_id_organizations_id_fk",
           "tableFrom": "announcements",
-          "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "tableTo": "organizations",
+          "columnsFrom": ["organization_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -120,12 +112,8 @@
           "name": "announcements_media_id_images_id_fk",
           "tableFrom": "announcements",
           "tableTo": "images",
-          "columnsFrom": [
-            "media_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["media_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -226,12 +214,8 @@
           "name": "events_group_id_groups_id_fk",
           "tableFrom": "events",
           "tableTo": "groups",
-          "columnsFrom": [
-            "group_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["group_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -239,12 +223,8 @@
           "name": "events_user_id_users_id_fk",
           "tableFrom": "events",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -292,9 +272,7 @@
         "group_types_name_unique": {
           "name": "group_types_name_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
+          "columns": ["name"]
         }
       },
       "policies": {},
@@ -372,12 +350,8 @@
           "name": "groups_type_id_group_types_id_fk",
           "tableFrom": "groups",
           "tableTo": "group_types",
-          "columnsFrom": [
-            "type_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["type_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -385,12 +359,8 @@
           "name": "groups_user_id_users_id_fk",
           "tableFrom": "groups",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -533,12 +503,8 @@
           "name": "organizations_media_id_images_id_fk",
           "tableFrom": "organizations",
           "tableTo": "images",
-          "columnsFrom": [
-            "media_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["media_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -633,12 +599,8 @@
           "name": "posters_media_id_images_id_fk",
           "tableFrom": "posters",
           "tableTo": "images",
-          "columnsFrom": [
-            "media_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["media_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -646,12 +608,8 @@
           "name": "posters_group_id_groups_id_fk",
           "tableFrom": "posters",
           "tableTo": "groups",
-          "columnsFrom": [
-            "group_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["group_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -659,12 +617,8 @@
           "name": "posters_user_id_users_id_fk",
           "tableFrom": "posters",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -711,12 +665,8 @@
           "name": "user_organizations_user_id_users_id_fk",
           "tableFrom": "user_organizations",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -724,12 +674,8 @@
           "name": "user_organizations_organization_id_organizations_id_fk",
           "tableFrom": "user_organizations",
           "tableTo": "organizations",
-          "columnsFrom": [
-            "organization_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["organization_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -737,10 +683,7 @@
       "compositePrimaryKeys": {
         "user_organizations_user_id_organization_id_pk": {
           "name": "user_organizations_user_id_organization_id_pk",
-          "columns": [
-            "user_id",
-            "organization_id"
-          ]
+          "columns": ["user_id", "organization_id"]
         }
       },
       "uniqueConstraints": {},
@@ -814,11 +757,7 @@
     "public.media_type": {
       "name": "media_type",
       "schema": "public",
-      "values": [
-        "image",
-        "gif",
-        "video"
-      ]
+      "values": ["image", "gif", "video"]
     }
   },
   "schemas": {},
