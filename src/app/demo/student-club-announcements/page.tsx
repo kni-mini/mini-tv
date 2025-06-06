@@ -2,8 +2,7 @@
 
 import ClubAnnouncement from "@/components/ClubAnnouncement";
 
-export default function Announcement(){
-  
+export default async function Announcement(){
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 gap-6">
 
