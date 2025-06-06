@@ -1,7 +1,6 @@
 'use client'
 
-import Form from 'next/form'
-import DeanAnnouncementForm from '@/Components/DeanAnnouncementForm'
+import DeanAnnouncementForm from '@/components/DeanAnnouncementForm'
 
 export default function Page() {
   return (

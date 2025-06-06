@@ -1,6 +1,6 @@
 "use client"
 
-import ClubAnnouncement from "@/Components/ClubAnnouncement";
+import ClubAnnouncement from "@/components/ClubAnnouncement";
 
 export default function Announcement(){
   return (

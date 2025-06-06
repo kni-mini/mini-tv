@@ -1,7 +1,7 @@
 import React from 'react';
 import Announcement from '@/components/Announcement';
 import type { AnnouncementProps } from '@/components/Announcement';
-import Media, { MediaProps } from '@/components//Media';
+import Media, { MediaProps } from '@/components/Media';
 
 const now = new Date();
 const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
