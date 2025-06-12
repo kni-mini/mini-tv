@@ -1,3 +1,4 @@
+
 // src/components/Gif.tsx
 import React from 'react'
 import Poster from '../../../src/components/Poster'

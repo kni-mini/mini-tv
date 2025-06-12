@@ -1,5 +1,7 @@
+
 // @/components/Announcement.tsx
 import React from 'react';
+
 
 export interface AnnouncementProps {
   type: 'announcement';
@@ -13,7 +15,9 @@ export interface AnnouncementProps {
   text: string;                  // body copy
   startDate: Date;
   createdAt: Date;
+
 }
+
 
 const Announcement: React.FC<AnnouncementProps> = ({
   organizationName,
@@ -24,6 +28,7 @@ const Announcement: React.FC<AnnouncementProps> = ({
   text,
   startDate,
   createdAt,
+
 }) => {
   return (
     <div
@@ -172,3 +177,4 @@ const Announcement: React.FC<AnnouncementProps> = ({
 };
 
 export default Announcement;
+

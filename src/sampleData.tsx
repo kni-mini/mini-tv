@@ -1,3 +1,4 @@
+
 // sampleData.tsx
 import React from 'react';
 import type { AnnouncementProps } from '@/components/Announcement';
@@ -5,7 +6,7 @@ import type { MediaProps } from '@/components/Media';
 
 const now = new Date();
 
-// (You can keep any other Media entries here; these two are just announcements.)
+
 export const sampleMedia: MediaProps[] = [
   {
     id: 1,
@@ -36,12 +37,12 @@ export const sampleMedia: MediaProps[] = [
   },
 ];
 
-// Updated “sampleAnnouncements” with the two new objects you provided.
-// Make sure your AnnouncementProps interface includes these fields!
+
 export const sampleAnnouncements: AnnouncementProps[] = [
   {
     type: 'announcement',
     id: 1,
+
     announcementName: 'Welcome to Mini TV!',
     organizationName: 'Mini Corp',
     organizationLogo:
@@ -53,10 +54,12 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     text: 'This is a demo announcement. Enjoy the new features and stay tuned for more updates!',
     startDate: new Date('2025-05-01T09:00:00Z'),
     createdAt: new Date('2025-05-01T08:00:00Z'),
+
   },
   {
     type: 'announcement',
     id: 3,
+
     announcementName: 'System Maintenance',
     organizationName: 'Mini Corp',
     organizationLogo:
@@ -69,5 +72,6 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     startDate: new Date('2025-05-01T09:00:00Z'),
     createdAt: new Date('2025-05-01T08:00:00Z'),
   },
+
 
 ];
