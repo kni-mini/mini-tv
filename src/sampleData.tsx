@@ -1,10 +1,11 @@
+
+// sampleData.tsx
+import React from 'react';
 import type { AnnouncementProps } from '@/components/Announcement';
-import { MediaProps } from '@/components/Media';
+import type { MediaProps } from '@/components/Media';
 
 const now = new Date();
-const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-const nextWeek = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+
 
 export const sampleMedia: MediaProps[] = [
   {
@@ -36,171 +37,41 @@ export const sampleMedia: MediaProps[] = [
   },
 ];
 
+
 export const sampleAnnouncements: AnnouncementProps[] = [
   {
+    type: 'announcement',
     id: 1,
-    name: 'Dean Office Hours',
-    message:
-      '08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest. 08.05.2025 from 12:00 godziny dziekańskie z okazji Całkonaliów / hours free from classes due to Integral Fest.',
-    groupId: 1,
-    userId: 101,
-    startDate: yesterday,
-    endDate: tomorrow,
-    createdAt: now,
-    mediaId: 1,
+
+    announcementName: 'Welcome to Mini TV!',
+    organizationName: 'Mini Corp',
+    organizationLogo:
+      'https://static.vecteezy.com/system/resources/thumbnails/036/117/378/small_2x/educational-logo-design-free-vector.jpg',
+    media:
+      'https://cdn.dribbble.com/userupload/22692822/file/original-d031c15490e6296c7d9a492715072d5a.gif',
+    mediaType: 'gif',
+    mediaAlt: 'Globe',
+    text: 'This is a demo announcement. Enjoy the new features and stay tuned for more updates!',
+    startDate: new Date('2025-05-01T09:00:00Z'),
+    createdAt: new Date('2025-05-01T08:00:00Z'),
+
   },
   {
-    id: 2,
-    name: 'Language classes',
-    message:
-      'Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025Zapisy na lektoraty w semestrze letnim 2024/2025/ Registration for foreign language classes in the summer semester 2024/2025',
-    groupId: 2,
-    userId: 102,
-    startDate: now,
-    endDate: nextWeek,
-    createdAt: now,
-    mediaId: 2,
-  },
-  {
+    type: 'announcement',
     id: 3,
-    name: 'Library Course',
-    message:
-      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
-    groupId: 3,
-    userId: 103,
-    startDate: yesterday,
-    endDate: tomorrow,
-    createdAt: now,
-    mediaId: undefined,
+
+    announcementName: 'System Maintenance',
+    organizationName: 'Mini Corp',
+    organizationLogo:
+      'https://static.vecteezy.com/system/resources/thumbnails/036/117/378/small_2x/educational-logo-design-free-vector.jpg',
+    media:
+      'https://themewinter.com/wp-content/uploads/2025/04/event-announcement-and-make-it-on-event-theme.webp',
+    mediaType: 'image',
+    mediaAlt: 'Maintenance Banner',
+    text: 'We will be performing scheduled maintenance on May 25th. Service may be unavailable for a short period.',
+    startDate: new Date('2025-05-01T09:00:00Z'),
+    createdAt: new Date('2025-05-01T08:00:00Z'),
   },
-  {
-    id: 4,
-    name: 'Library Course',
-    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course',
-    groupId: 3,
-    userId: 103,
-    startDate: tomorrow,
-    endDate: nextWeek,
-    createdAt: now,
-    mediaId: undefined,
-  },
-  {
-    id: 5,
-    name: 'Library Course',
-    message: 'ekurs Przysposobienie biblioteczne/ Library Training e-course',
-    groupId: 3,
-    userId: 103,
-    startDate: new Date('2025-01-01'),
-    endDate: new Date('2025-02-01'),
-    createdAt: now,
-    mediaId: undefined,
-  },
-  {
-    id: 6,
-    name: 'Library Course',
-    message:
-      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course ',
-    groupId: 3,
-    userId: 103,
-    startDate: yesterday,
-    endDate: nextWeek,
-    createdAt: now,
-    mediaId: 3,
-  },
-  {
-    id: 7,
-    name: 'Library Course again...',
-    message:
-      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
-    groupId: 3,
-    userId: 103,
-    startDate: new Date('2025-04-01'),
-    endDate: new Date('2025-05-05'),
-    createdAt: now,
-    mediaId: undefined,
-  },
-  {
-    id: 8,
-    name: 'Library Course again...',
-    message:
-      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
-    groupId: 3,
-    userId: 103,
-    startDate: new Date('2025-04-01'),
-    endDate: new Date('2025-05-05'),
-    createdAt: now,
-    mediaId: undefined,
-  },
-  {
-    id: 9,
-    name: 'Library Course again...',
-    message:
-      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
-    groupId: 3,
-    userId: 103,
-    startDate: new Date('2025-04-01'),
-    endDate: new Date('2025-05-05'),
-    createdAt: now,
-    mediaId: undefined,
-  },
-  {
-    id: 10,
-    name: 'Library Course again...',
-    message:
-      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
-    groupId: 3,
-    userId: 103,
-    startDate: new Date('2025-04-01'),
-    endDate: new Date('2025-05-09'),
-    createdAt: now,
-    mediaId: undefined,
-  },
-  {
-    id: 11,
-    name: 'Library Course again...',
-    message:
-      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
-    groupId: 3,
-    userId: 103,
-    startDate: new Date('2025-04-01'),
-    endDate: new Date('2025-05-09'),
-    createdAt: now,
-    mediaId: undefined,
-  },
-  {
-    id: 12,
-    name: 'Library Course again...',
-    message:
-      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
-    groupId: 3,
-    userId: 103,
-    startDate: new Date('2025-04-01'),
-    endDate: new Date('2025-05-09'),
-    createdAt: now,
-    mediaId: undefined,
-  },
-  {
-    id: 13,
-    name: 'Library Course again...',
-    message:
-      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
-    groupId: 3,
-    userId: 103,
-    startDate: new Date('2025-04-01'),
-    endDate: new Date('2025-05-05'),
-    createdAt: now,
-    mediaId: undefined,
-  },
-  {
-    id: 14,
-    name: 'Library Course again...',
-    message:
-      'ekurs Przysposobienie biblioteczne/ Library Training e-course ekurs Przysposobienie biblioteczne/ Library Training e-course',
-    groupId: 3,
-    userId: 103,
-    startDate: new Date('2025-04-01'),
-    endDate: new Date('2025-05-09'),
-    createdAt: now,
-    mediaId: undefined,
-  },
+
+
 ];
