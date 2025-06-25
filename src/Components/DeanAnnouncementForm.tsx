@@ -42,7 +42,7 @@ export default function DeanAnnouncementForm(){
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         // if(!form.title || !form.body || !form.submittedBy){
         //     alert("Please fill in all required fields: title, body, and submitted by.");
@@ -55,6 +55,19 @@ export default function DeanAnnouncementForm(){
             }
         }
         PostAction(form); // console.log it
+        await fetch('http://localhost:3000/api/announcements', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify({
+            title:       form.title,
+            body:        form.body,
+            submittedBy: form.submittedBy,
+            mediaSrc:    form.mediaSrc,
+            mediaType:   form.mediaType,
+            endDate:     form.endDate || null,
+            })
+        })
+  router.push('/demo/announcements')
         router.push("/demo/announcements");
     };
 
