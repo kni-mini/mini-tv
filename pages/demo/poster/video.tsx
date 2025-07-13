@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import Poster from '../../../src/components/Poster'
+import Poster from '../../../src/components/Poster';
 
 export interface VideoProps {
   /** Path to the video file */
-  path: string
+  path: string;
   /** Auto‐play the video (default: false) */
-  autoplay?: boolean
+  autoplay?: boolean;
   /** Loop the video (default: false) */
-  loop?: boolean
+  loop?: boolean;
   /** Mute the video (default: false) */
-  muted?: boolean
+  muted?: boolean;
   /** Pass additional CSS classes */
-  className?: string
+  className?: string;
   /** Inline styles */
-  style?: React.CSSProperties
+  style?: React.CSSProperties;
 }
 
 const Video: React.FC<VideoProps> = ({
@@ -33,6 +32,6 @@ const Video: React.FC<VideoProps> = ({
     className={className}
     style={style}
   />
-)
+);
 
-export default Video
+export default Video;

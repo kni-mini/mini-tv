@@ -1,14 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import ClubAnnouncement from '../ClubAnnouncement';
+import Announcement from '../Announcement';
 
-describe('ClubAnnouncement', () => {
+describe('Announcement (Club variant)', () => {
   it('renders the title and body', () => {
     render(
-      <ClubAnnouncement
+      <Announcement
         title="Test Event"
         body="This is a test announcement."
         clubName="Some club"
+        variant="club"
       />
     );
 
@@ -20,7 +21,7 @@ describe('ClubAnnouncement', () => {
     const longText =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
 
-    render(<ClubAnnouncement title="Short" body={longText} clubName="PW" />);
+    render(<Announcement title="Short" body={longText} clubName="PW" variant="club" />);
 
     // Since maxLen is 300, we expect the text to be truncated at 300 chars + "..."
     const expectedText = longText.slice(0, 300) + '...';
@@ -29,12 +30,13 @@ describe('ClubAnnouncement', () => {
 
   it('renders media if provided', () => {
     render(
-      <ClubAnnouncement
+      <Announcement
         title="With Media"
         body="Test"
         clubName="Media Club"
         mediaSrc="/student_club_logos/shitemoji.png"
         mediaType="image"
+        variant="club"
       />
     );
 
@@ -42,12 +44,13 @@ describe('ClubAnnouncement', () => {
   });
   it("renders a video when mediaType is 'video'", () => {
     const { container } = render(
-      <ClubAnnouncement
+      <Announcement
         title="Video Test"
         body="Watch this announcement!"
         clubName="Film Club"
         mediaSrc="/media/Rick Roll (Different link + no ads).mp4"
         mediaType="video"
+        variant="club"
       />
     );
 

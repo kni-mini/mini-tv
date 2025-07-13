@@ -1,6 +1,3 @@
-// page: demo/poster/paginateAnnouncements.tsx
-import React from 'react';
-import Announcement from '@/components/Announcement';
 import type { AnnouncementProps } from '@/components/Announcement';
 
 export type WeightedAnnouncement = AnnouncementProps & { weight: number };

@@ -3,6 +3,7 @@ import { organizations } from './organizations';
 import { groups } from './groups';
 import { uniqueWhenNotDeleted } from './utils';
 import { medias } from './medias';
+import { users } from './users';
 
 export const announcements = pgTable(
   'announcements',
@@ -14,6 +15,9 @@ export const announcements = pgTable(
     organizationId: integer('organization_id')
       .notNull()
       .references(() => organizations.id),
+    creatorId: integer('creator_id')
+      .notNull()
+      .references(() => users.id),
     mediaId: integer('media_id').references(() => medias.id),
     startDate: timestamp('start_date').defaultNow().notNull(),
     endDate: timestamp('end_date'),
@@ -22,3 +26,5 @@ export const announcements = pgTable(
   },
   (table) => [uniqueWhenNotDeleted(table.deletedAt, table.name)(index())]
 );
+
+export type Announcement = typeof announcements.$inferSelect;

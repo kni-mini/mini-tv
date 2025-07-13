@@ -1,11 +1,7 @@
-
-// sampleData.tsx
-import React from 'react';
 import type { AnnouncementProps } from '@/components/Announcement';
 import type { MediaProps } from '@/components/Media';
 
 const now = new Date();
-
 
 export const sampleMedia: MediaProps[] = [
   {
@@ -37,7 +33,6 @@ export const sampleMedia: MediaProps[] = [
   },
 ];
 
-
 export const sampleAnnouncements: AnnouncementProps[] = [
   {
     type: 'announcement',
@@ -54,7 +49,6 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     text: 'This is a demo announcement. Enjoy the new features and stay tuned for more updates!',
     startDate: new Date('2025-05-01T09:00:00Z'),
     createdAt: new Date('2025-05-01T08:00:00Z'),
-
   },
   {
     type: 'announcement',
@@ -72,6 +66,4 @@ export const sampleAnnouncements: AnnouncementProps[] = [
     startDate: new Date('2025-05-01T09:00:00Z'),
     createdAt: new Date('2025-05-01T08:00:00Z'),
   },
-
-
 ];

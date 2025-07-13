@@ -1,13 +1,11 @@
 // page: demo/poster/paginateAnnouncements.tsx
-"use client"
+'use client';
 
 import React from 'react';
 import { useMemo, useState } from 'react';
 import Announcement from '@/components/Announcement';
-import type { AnnouncementProps } from '@/components/Announcement';
-import {sampleAnnouncements} from '@/sampleData'
-import {paginateAnnouncements} from './paginateAnnouncements'
-
+import { sampleAnnouncements } from '@/sampleData';
+import { paginateAnnouncements } from './paginateAnnouncements';
 
 export default function AnnouncementsBoard() {
   const pages = useMemo(() => paginateAnnouncements(sampleAnnouncements), [sampleAnnouncements]);
@@ -24,18 +22,22 @@ export default function AnnouncementsBoard() {
         ))}
       </div>
 
-
       <div className="flex justify-center mt-6 gap-6">
         <button
           disabled={currentPageIndex === 0}
           onClick={() => setCurrentPageIndex((i) => Math.max(i - 1, 0))}
-          className="p-2">Previous</button>
+          className="p-2"
+        >
+          Previous
+        </button>
         <button
           disabled={currentPageIndex >= pages.length - 1}
           onClick={() => setCurrentPageIndex((i) => Math.min(i + 1, pages.length - 1))}
-          className="p-2">Next</button>
+          className="p-2"
+        >
+          Next
+        </button>
       </div>
-
     </div>
   );
 }

@@ -12,3 +12,5 @@ export const users = pgTable(
   },
   (table) => [uniqueWhenNotDeleted(table.deletedAt, table.email)(index())]
 );
+
+export type User = typeof users.$inferSelect;

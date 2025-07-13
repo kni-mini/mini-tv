@@ -13,7 +13,7 @@ export const posters = pgTable(
       .notNull()
       .references(() => medias.id),
     groupId: integer('group_id').references(() => groups.id),
-    userId: integer('user_id')
+    creatorId: integer('creator_id')
       .notNull()
       .references(() => users.id),
     startDate: timestamp('start_date').defaultNow().notNull(),
@@ -23,3 +23,5 @@ export const posters = pgTable(
   },
   (table) => [uniqueWhenNotDeleted(table.deletedAt, table.name)(index())]
 );
+
+export type Poster = typeof posters.$inferSelect;

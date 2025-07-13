@@ -1,11 +1,11 @@
 import React from 'react';
-import ClubAnnouncementForm from '@/components/ClubAnnouncementForm';
+import AnnouncementForm from '@/components/AnnouncementForm';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ANNOUNCEMENT_MAX_MESSAGE_LENGTH } from '@/app/constants';
 
-describe('ClubAnnouncementForm', () => {
+describe('AnnouncementForm (Club type)', () => {
   it('renders form fields', () => {
-    render(<ClubAnnouncementForm />);
+    render(<AnnouncementForm type="club" />);
     expect(screen.getByLabelText(/Title:/)).toBeInTheDocument();
     expect(screen.getByLabelText(/Message:/)).toBeInTheDocument();
     expect(screen.getByLabelText(/Media/)).toBeInTheDocument();
@@ -15,7 +15,7 @@ describe('ClubAnnouncementForm', () => {
   });
 
   it('changes from/to form and preview', async () => {
-    render(<ClubAnnouncementForm />);
+    render(<AnnouncementForm type="club" />);
 
     // Initially on form tab
     expect(screen.getByText('Create Club Announcement')).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe('ClubAnnouncementForm', () => {
   });
 
   it('displays a warning on long message', async () => {
-    render(<ClubAnnouncementForm />);
+    render(<AnnouncementForm type="club" />);
     const textarea = screen.getByLabelText(/Message:/);
     fireEvent.change(textarea, {
       target: { value: 'a'.repeat(ANNOUNCEMENT_MAX_MESSAGE_LENGTH + 10) },
@@ -44,7 +44,7 @@ describe('ClubAnnouncementForm', () => {
   });
 
   it('form can be filled out with valid data', async () => {
-    render(<ClubAnnouncementForm />);
+    render(<AnnouncementForm type="club" />);
     const message = screen.getByLabelText(/Message:/);
     const title = screen.getByLabelText(/Title:/);
 

@@ -1,59 +1,48 @@
 // src/components/Poster.tsx
-import React from 'react'
-import NextImage, { type ImageProps as NextImageProps } from 'next/image'
-import styles from './Poster.module.css'
-
+import React from 'react';
+import NextImage, { type ImageProps as NextImageProps } from 'next/image';
+import styles from './Poster.module.css';
+import Image from 'next/image';
 
 type BasePosterProps = {
   /** extra wrapper classes */
-  className?: string
+  className?: string;
   /** extra inline styles on the container */
-  style?: React.CSSProperties
-}
+  style?: React.CSSProperties;
+};
 
 export type ImagePosterProps = Omit<NextImageProps, 'unoptimized'> & {
-
-  type:  'image'
-  src:   string
-  fill?: boolean
-} & BasePosterProps
+  type: 'image';
+  src: string;
+  fill?: boolean;
+} & BasePosterProps;
 
 export type GifPosterProps = {
-  type: 'gif'
-  src:  string
-  alt?: string
-  loop?: boolean
-} & BasePosterProps
+  type: 'gif';
+  src: string;
+  alt?: string;
+  loop?: boolean;
+} & BasePosterProps;
 
 export type VideoPosterProps = {
-  type: 'video'
-  src:  string
-  autoplay?: boolean
-  loop?:     boolean
-  muted?:    boolean
-} & BasePosterProps
-
+  type: 'video';
+  src: string;
+  autoplay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+} & BasePosterProps;
 
 export type PosterProps = ImagePosterProps | GifPosterProps | VideoPosterProps;
 
 export const Poster: React.FC<PosterProps> = (props) => {
-  const { className, style } = props
+  const { className, style } = props;
 
   switch (props.type) {
     case 'image': {
-
-      const {
-        src,
-        alt   = 'Poster',
-        fill  = false,
-      } = props
-
+      const { src, alt = 'Poster', fill = false } = props;
 
       return (
-        <div
-          className={`${styles.container}${className ? ' ' + className : ''}`}
-          style={style}
-        >
+        <div className={`${styles.container}${className ? ' ' + className : ''}`} style={style}>
           <NextImage
             src={src}
             alt={alt}
@@ -68,18 +57,17 @@ export const Poster: React.FC<PosterProps> = (props) => {
     case 'gif': {
       const { src, alt = 'Poster', loop = false } = props;
       return (
-
-        <div
-          className={`${styles.container}${className ? ' ' + className : ''}`}
-          style={style}
-        >
-          <img
-
+        <div className={`${styles.container}${className ? ' ' + className : ''}`} style={style}>
+          <Image
             className={styles.media}
             src={src}
             alt={alt}
             loading="lazy"
-            {...(loop ? { /* gifs loop automatically */ } : {})}
+            {...(loop
+              ? {
+                  /* gifs loop automatically */
+                }
+              : {})}
           />
         </div>
       );
@@ -88,10 +76,7 @@ export const Poster: React.FC<PosterProps> = (props) => {
     case 'video': {
       const { src, autoplay = false, loop = false, muted = false } = props;
       return (
-        <div
-          className={`${styles.container}${className ? ' ' + className : ''}`}
-          style={style}
-        >
+        <div className={`${styles.container}${className ? ' ' + className : ''}`} style={style}>
           <video
             data-testid="poster-video"
             className={styles.media}
@@ -112,6 +97,4 @@ export const Poster: React.FC<PosterProps> = (props) => {
   }
 };
 
-
-export default Poster
-
+export default Poster;

@@ -7,7 +7,6 @@ import Media from './poster/Media';
 import Announcement from '@/components/Announcement';
 import type { AnnouncementProps } from '@/components/Announcement';
 import { sampleAnnouncements } from '@/sampleData';
-import { paginateAnnouncements } from './poster/paginateAnnouncements';
 
 interface Props {
   files: string[];
@@ -27,15 +26,12 @@ const PosterHolder: NextPage<Props> = ({ files }) => {
   const now = new Date();
   const activeAnnouncements = useMemo(
     () => sampleAnnouncements.filter((a) => a.startDate <= now),
-    [now]
+    []
   );
 
   // 2) Build interleaved slides
   const slides = useMemo<
-    (
-      | { type: 'media'; src: string }
-      | { type: 'announcement'; data: AnnouncementProps }
-    )[]
+    ({ type: 'media'; src: string } | { type: 'announcement'; data: AnnouncementProps })[]
   >(() => {
     const out: (
       | { type: 'media'; src: string }
@@ -80,7 +76,11 @@ const PosterHolder: NextPage<Props> = ({ files }) => {
 
   // 5) Header/footer times
   const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  const dateString = now.toLocaleDateString([], { year: 'numeric', month: 'short', day: '2-digit' });
+  const dateString = now.toLocaleDateString([], {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+  });
 
   // 6) Current slide
   const currentSlide = slides[currentSlideIndex];
