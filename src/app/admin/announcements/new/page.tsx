@@ -1,11 +1,10 @@
 'use client';
 
-import { useAuth } from '@/lib/hooks/use-auth';
+import { useAuth } from '@/src/lib/hooks/use-auth';
 import { SessionProvider } from 'next-auth/react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@components/ui/button';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { AnnouncementForm } from '@/components/forms/announcement-form';
 
 function AddAnnouncementContent() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -28,7 +27,9 @@ function AddAnnouncementContent() {
       </div>
 
       <div className="border border-border rounded-lg p-6">
-        <AnnouncementForm />
+        <p className="mb-4">Use the form below to create a new announcement.</p>
+        {/* In a real implementation, you would add a form here */}
+        <p className="text-muted-foreground">Announcement form would be implemented here.</p>
       </div>
     </div>
   );

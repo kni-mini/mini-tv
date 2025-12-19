@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1744964555081,
+      "tag": "0000_initial_database_setup",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1746631579099,
+      "tag": "0001_add_image_id_to_announcments_table",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1746632628034,
+      "tag": "0002_rename_images_to_medias_add_type_field",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1746633366927,
+      "tag": "0003_added_media_type_enum",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1746645077398,
+      "tag": "0004_announcments_change_user_id_to_organization_id",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1746785095736,
+      "tag": "0005_user_switch_username_to_email",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+/*
+  Styles for the Poster component, using Material UI Card as the base.
+*/
+
+.posterWrapper {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.posterMedia {
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  object-fit: contain;
+  display: block;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .posterMedia {
+    height: 100vh;
+  }
+}

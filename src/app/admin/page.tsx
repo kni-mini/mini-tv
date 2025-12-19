@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@components/ui/button';
 import Link from 'next/link';
-import { useAuth } from '@/lib/hooks/use-auth';
+import { useAuth } from '@/src/lib/hooks/use-auth';
 import { SessionProvider } from 'next-auth/react';
 import { Suspense } from 'react';
 
@@ -22,35 +22,22 @@ function AdminContent() {
       <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="border border-border rounded-lg p-6 flex flex-col">
+        <div className="border border-border rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-4">Announcement Management</h2>
-          <p className="mb-4 flex-grow">
-            Create and manage announcements for the platform. You can optionally attach media files.
-          </p>
-          <Button asChild className="mt-auto self-start">
-            <Link href="/admin/announcements/new">Add New Announcement</Link>
-          </Button>
-        </div>
-
-        <div className="border border-border rounded-lg p-6 flex flex-col">
-          <h2 className="text-xl font-semibold mb-4">Poster Management</h2>
-          <p className="mb-4 flex-grow">
-            Create and manage posters with media files for the platform.
-          </p>
-          <Button asChild className="mt-auto self-start">
-            <Link href="/admin/posters/new">Add New Poster</Link>
-          </Button>
-        </div>
-
-        <div className="border border-border rounded-lg p-6 md:col-span-2">
-          <h2 className="text-xl font-semibold mb-4">All Content</h2>
           <div className="space-y-4">
-            <p>
-              View and manage all content including currently active and upcoming announcements and
-              posters.
-            </p>
+            <p>Create and manage announcements for the platform.</p>
+            <Button asChild>
+              <Link href="/admin/announcements/new">Add New Announcement</Link>
+            </Button>
+          </div>
+        </div>
+
+        <div className="border border-border rounded-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">Scheduled Announcements</h2>
+          <div className="space-y-4">
+            <p>View and manage upcoming announcements.</p>
             <Button asChild variant="outline">
-              <Link href="/admin/scheduled">View All Content</Link>
+              <Link href="/admin/announcements/scheduled">View Scheduled Announcements</Link>
             </Button>
           </div>
         </div>

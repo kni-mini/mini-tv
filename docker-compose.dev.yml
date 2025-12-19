@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   db:
@@ -17,6 +17,36 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - default
+
+
+  webapp:
+    build: 
+      dockerfile: Dockerfile.dev
+    container_name: minitv-webapp-dev
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    command: sh -c "pnpm db:migrate && pnpm dev"
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - default
+
 
 volumes:
   postgres_data:
+
+networks:
+  default:
+    name: minitv-dev-network
+    driver: bridge

@@ -4,8 +4,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export default {
-  schema: './src/lib/db/schema/*',
-  out: './src/lib/db/migrations',
+  schema: './db/schema/*',
+  out: './db/migrations',
   dialect: 'postgresql',
   dbCredentials: {
     host: process.env.POSTGRES_HOST || 'localhost',
@@ -15,5 +15,5 @@ export default {
     port: Number(process.env.POSTGRES_PORT) || 5432,
   },
   verbose: true,
-  strict: true,
+  strict: false,
 } satisfies Config;

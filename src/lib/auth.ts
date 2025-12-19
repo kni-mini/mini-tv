@@ -2,9 +2,9 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { NextAuthOptions } from 'next-auth';
 import { getUserByEmail } from '@/lib/users/actions';
 import bcrypt from 'bcryptjs';
-import { db } from '@/lib/db';
+import { db } from '@/db';
 import { eq } from 'drizzle-orm';
-import { users } from '@/lib/db/schema/users';
+import { users } from '@/db/schema/users';
 
 const providers: Array<ReturnType<typeof CredentialsProvider>> = [
   CredentialsProvider({

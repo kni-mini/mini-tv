@@ -1,0 +1,35 @@
+# Use Node.js LTS version as the base image
+FROM node:20-alpine
+
+# Install dependencies for building native modules if needed
+RUN apk add --no-cache libc6-compat
+
+# Set working directory
+WORKDIR /app
+
+# Install pnpm globally
+RUN corepack enable && corepack prepare pnpm@latest-10 --activate
+
+# Copy package.json and pnpm-lock.yaml
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install
+
+# Copy the rest of the application
+COPY . .
+
+# Create a script to run migrations and start the dev server
+RUN echo '#!/bin/sh\n\
+set -e\n\
+echo "Running database migrations..."\n\
+pnpm db:migrate\n\
+echo "Starting development server..."\n\
+exec pnpm dev\n\
+' > /app/docker-entrypoint.sh && chmod +x /app/docker-entrypoint.sh
+
+# Expose port
+EXPOSE 3000
+
+# Start development server with migrations
+CMD ["/app/docker-entrypoint.sh"]

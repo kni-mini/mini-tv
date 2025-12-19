@@ -1,42 +1,39 @@
 'use client';
 
 import React from 'react';
-import { useMemo, useState } from 'react';
-import Announcement from '@/components/Announcement';
-import { sampleAnnouncements } from '@/sampleData';
-import { paginateAnnouncements } from './paginateAnnouncements';
+import { Announcement } from '@/src/components/announcement/announcement';
+import { useAnnouncements } from '@/src/lib/hooks/use-announcements';
+import { CircularProgress } from '@material-ui/core';
+import { toast } from 'sonner';
 
-export default function AnnouncementsBoard() {
-  const pages = useMemo(() => paginateAnnouncements(sampleAnnouncements), []);
+export default function AnnouncementsPage() {
+  const { announcements, loading, error } = useAnnouncements();
 
-  const [currentPageIndex, setCurrentPageIndex] = useState(0);
-  const currentPage = pages[currentPageIndex];
+  React.useEffect(() => {
+    if (error) {
+      toast.error('Error loading announcements');
+    }
+  }, [error]);
+
+  if (loading) {
+    return (
+      <div
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (announcements.length === 0) {
+    return <p>No announcements available.</p>;
+  }
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-6 text-center">Dean Announcements</h1>
-      <div className="h-[80vh] @container flex flex-col gap-4">
-        {currentPage.map((a) => (
-          <Announcement key={a.id} {...a} />
-        ))}
-      </div>
-
-      <div className="flex justify-center mt-6 gap-6">
-        <button
-          disabled={currentPageIndex === 0}
-          onClick={() => setCurrentPageIndex((i) => Math.max(i - 1, 0))}
-          className="p-2"
-        >
-          Previous
-        </button>
-        <button
-          disabled={currentPageIndex >= pages.length - 1}
-          onClick={() => setCurrentPageIndex((i) => Math.min(i + 1, pages.length - 1))}
-          className="p-2"
-        >
-          Next
-        </button>
-      </div>
+    <div>
+      {announcements.map((announcement) => (
+        <Announcement key={announcement.id} {...announcement} />
+      ))}
     </div>
   );
 }

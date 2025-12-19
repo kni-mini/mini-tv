@@ -18,11 +18,24 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
-    },
-    "types": ["jest", "node"]
+      "@/*": ["./*"],
+      "@components/*": ["src/components/*"],
+      "@app/*": ["src/app/*"],
+      "@/lib/*": ["src/lib/*"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src",
+    "global.d.ts",
+    "src/app",
+    "src/componsrc/libs",
+    "lib"
+  ],
   "exclude": ["node_modules"]
 }
